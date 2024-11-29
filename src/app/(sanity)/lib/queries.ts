@@ -31,3 +31,15 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     publishedAt,
     body
 }`)
+
+export const fetchPosts = (page = 1, pageSize = 5) => {
+  const skip = (page - 1) * pageSize;
+  return `
+    *[_type == "post"] | order(_createdAt desc) [${skip}...${skip + pageSize}] {
+      title,
+      slug,
+      _createdAt,
+      body
+    }
+  `;
+};
