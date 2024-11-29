@@ -1,10 +1,11 @@
 
 'use client'
 
+import config from '@/app/(sanity)/lib/config'
 import {NextStudio} from 'next-sanity/studio'
 import {StudioProvider, StudioLayout} from 'sanity'
 
-import config from '../../../sanity.config'
+//import config from '../../../sanity.config'
 
 function StudioPage() {
   return (
