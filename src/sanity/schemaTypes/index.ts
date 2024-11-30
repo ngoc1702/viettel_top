@@ -8,3 +8,4 @@ import {authorType} from './authorType'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [blockContentType, categoryType, postType, authorType],
 }
+

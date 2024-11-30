@@ -12,7 +12,7 @@ export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.curren
     categories[]-> {
       title
     },
-    publishedAt,
+    _createdAt,
     body
 }`)
 

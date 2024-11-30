@@ -25,3 +25,8 @@ body {
   margin-right:auto;
   margin-left:auto;
 }
+
+.box-shadow-basic {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+

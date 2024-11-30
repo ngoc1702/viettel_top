@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Home from "./page";
 import Header from "./component/header";
+import Footer from "./component/footer";
 
 
 
@@ -30,15 +31,17 @@ export default function RootLayout({
   return (
     
     <html lang="en">
-      <Header/>
-      <div>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-      </div>
-    </html>
-   
+  <head>
+   <meta name="description" content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)" />
+   <meta name="keywords" content="Next.js, SEO, React, thẻ meta" />
+   <meta name="author" content="Tên của bạn hoặc công ty" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <Header /> 
+    {children} 
+    <Footer /> 
+  </body>
+</html>
   );
 }

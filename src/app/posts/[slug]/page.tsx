@@ -52,7 +52,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
         {post.title}
       </h1>
       <span className="mt-1 text-gray-500 text-base">
-        {new Date(post._createdAt).toLocaleDateString()}
+         {new Date(post?._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
       </span>
       <img
         className="lg:h-[50vh] md:h-36 w-full object-cover object-center mt-6"

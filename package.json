@@ -10,6 +10,10 @@
     "typegen": " sanity schema extract --path=src/sanity/extract.json && sanity typegen generate "
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-brands-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@sanity/client": "^6.22.5",
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.1.0",
@@ -19,7 +23,8 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "sanity": "^3.65.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "swiper": "^11.1.15"
   },
   "devDependencies": {
     "@types/node": "^20",
