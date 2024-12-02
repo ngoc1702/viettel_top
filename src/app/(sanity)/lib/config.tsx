@@ -11,4 +11,5 @@ export default defineConfig({
   dataset,
   plugins: [structureTool()],
   schema: {types: []},
+  schema2: {types: []},
 })

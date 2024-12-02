@@ -9,3 +9,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [blockContentType, categoryType, postType, authorType],
 }
 
+export const schema2: { types: SchemaTypeDefinition[] } = {
+  types: [blockContentType, categoryType, postType],
+}
+
+

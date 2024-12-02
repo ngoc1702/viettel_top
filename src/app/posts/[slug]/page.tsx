@@ -47,7 +47,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
   const post = await fetchPost(params.slug);
 
   return (
-    <div className="max-content py-20">
+    <div className="max-content px-5 md:px-0 py-12 m:py-20">
       <h1 className="text-2xl font-bold title-font text-gray-900 mb-3">
         {post.title}
       </h1>
@@ -55,7 +55,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
          {new Date(post?._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
       </span>
       <img
-        className="lg:h-[50vh] md:h-36 w-full object-cover object-center mt-6"
+        className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
         src={urlFor(post.mainImage).url()}
         alt={post.mainImage?.alt}
       />

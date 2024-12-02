@@ -9,11 +9,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="box-shadow-basic text-gray-600 body-font">
+    <footer id="footer" className="box-shadow-basic text-gray-600 body-font">
       <div className="max-content container  md:gap-12 px-5 py-16 md:py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="lg:w-1/3 md:w-1/3 flex-shrink-0 md:mx-0 mx-auto  text-left">
           <a href="">
-            <Image src={logo} alt="Logo" width={280} />
+            <Image src={logo} alt="Logo" width={240} className="w-[215px] md:w-[240px]"/>
           </a>
           <p className="mt-4 text-base text-gray-500">
             Hãy cùng đồng hành với chúng tôi để tạo ra các thành tựu lớn.
