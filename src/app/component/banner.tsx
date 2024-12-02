@@ -13,7 +13,10 @@ export default function Banner() {
       spaceBetween={50} 
       slidesPerView={1} 
       loop={true} // loop the slides
-      autoplay={{ delay: 3000 }} // autoplay every 3 seconds
+      autoplay={{
+        delay: 3000, // 3 seconds delay
+        disableOnInteraction: false, // Continue autoplay after interaction
+      }}
     >
       <SwiperSlide>
         <Image src={banner1} alt="Slide 1" />

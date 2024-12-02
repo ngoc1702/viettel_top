@@ -32,14 +32,34 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     body
 }`)
 
-export const fetchPosts = (page = 1, pageSize = 5) => {
-  const skip = (page - 1) * pageSize;
-  return `
-    *[_type == "post"] | order(_createdAt desc) [${skip}...${skip + pageSize}] {
-      title,
-      slug,
-      _createdAt,
-      body
-    }
-  `;
-};
+export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.current)][0...12]{
+  _id, title, slug, traffic, price, time,
+  "authorName": author->name,
+    mainImage {
+      asset-> {
+        url
+      },
+      alt
+    },
+    categories[]-> {
+      title
+    },
+    _createdAt,
+    body
+}`)
+
+export const POST_QUERY2 = defineQuery(`*[_type == "package" && slug.current == $slug][0]{
+  title, body, mainImage,slug, traffic, price, time,
+  "authorName": author->name,
+    mainImage {
+      asset-> {
+        url
+      },
+      alt
+    },
+    categories[]-> {
+      title
+    },
+    publishedAt,
+    body
+}`)

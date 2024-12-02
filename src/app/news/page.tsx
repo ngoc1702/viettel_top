@@ -174,7 +174,7 @@ export default function page() {
                               .replace(/\//g, "-")}
                           </p>
                         </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
+                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
                           <a
                             className="hover:text-[#CE2127]"
                             href={`/posts/${post?.slug.current}`}

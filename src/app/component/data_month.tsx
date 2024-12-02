@@ -29,7 +29,7 @@ export default function DATA_MOTNTH() {
             <div className="p-4 w-full">
               <div className=" items-center  h-full p-6 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
                 <span className="bg-[#CE2127] text-white px-3 py-1  text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b">
-                  5G135
+                  ADG
                 </span>
                 <h1 className=" mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                   <span className="text-[#CE2127]">4GB</span>
@@ -152,12 +152,74 @@ export default function DATA_MOTNTH() {
       {/* Swiper chỉ xuất hiện trên mobile (max-width: 768px) */}
       <div className="block md:hidden mt-8">
         <Swiper
-          spaceBetween={30}
+          spaceBetween={20}
           slidesPerView={1.5}
           // loop={true}
           autoplay={{ delay: 2500 }}
           className="mySwiper"
         >
+          <SwiperSlide className="flex justify-center items-center ">
+            <div className=" w-full">
+              <div className=" items-center  h-full p-6 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
+                <span className="bg-[#CE2127] text-white px-3 py-1  text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b">
+                  5G135
+                </span>
+                <h1 className=" mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
+                  <span className="text-[#CE2127]">4GB</span>
+                  <span className="text-lg ml-1 font-semibold text-gray-900">
+                    /NGÀY
+                  </span>
+                </h1>
+                <h2 className="text-base tracking-widest title-font mb-1 font-medium">
+                  MIỄN PHÍ
+                </h2>
+                <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                  <Image src={tv360} alt="tv360" width={30} />
+                  <Image src={mybox} alt="mybox" width={30} />
+                </span>
+                <h2 className=" mt-4  font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
+                  <span className="text-3xl text-gray-900">135.000đ</span>
+                  <span className="text-base ml-1 font-semibold text-gray-900">
+                    /THÁNG
+                  </span>
+                </h2>
+                <button className="flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-6  focus:outline-none hover:bg-[#AA0000] rounded font-semibold">
+                  Đăng ký
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center items-center ">
+            <div className=" w-full">
+              <div className=" items-center  h-full p-6 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
+                <span className="bg-[#CE2127] text-white px-3 py-1  text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b">
+                  5G135
+                </span>
+                <h1 className=" mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
+                  <span className="text-[#CE2127]">4GB</span>
+                  <span className="text-lg ml-1 font-semibold text-gray-900">
+                    /NGÀY
+                  </span>
+                </h1>
+                <h2 className="text-base tracking-widest title-font mb-1 font-medium">
+                  MIỄN PHÍ
+                </h2>
+                <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                  <Image src={tv360} alt="tv360" width={30} />
+                  <Image src={mybox} alt="mybox" width={30} />
+                </span>
+                <h2 className=" mt-4  font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
+                  <span className="text-3xl text-gray-900">135.000đ</span>
+                  <span className="text-base ml-1 font-semibold text-gray-900">
+                    /THÁNG
+                  </span>
+                </h2>
+                <button className="flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-6  focus:outline-none hover:bg-[#AA0000] rounded font-semibold">
+                  Đăng ký
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
           <SwiperSlide className="flex justify-center items-center ">
             <div className=" w-full">
               <div className=" items-center  h-full p-6 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
@@ -214,7 +276,13 @@ export default function DATA_MOTNTH() {
                     /THÁNG
                   </span>
                 </h2>
-                <button className="flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-6  focus:outline-none hover:bg-[#AA0000] rounded font-semibold">
+                <button
+                  onClick={() => {
+                    window.location.href =
+                      "sms:+84123456789?body=Nội dung tin nhắn";
+                  }}
+                  className="flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-6  focus:outline-none hover:bg-[#AA0000] rounded font-semibold"
+                >
                   Đăng ký
                 </button>
               </div>
@@ -234,7 +302,7 @@ export default function DATA_MOTNTH() {
             <span className="mb-4">
               Để đăng ký gói cước, vui lòng soạn tin nhắn trên điện thoại theo
               cú pháp
-              <span className="text-[#CE2127]"> 5G230B UP</span> gửi{" "}
+              <span className="text-[#CE2127]"> ADG</span> gửi{" "}
               <span className="text-[#CE2127]">290</span>. Để xem các thuê bao
               áp dụng gói cước trên, vui lòng kiểm tra tại link dưới.
             </span>

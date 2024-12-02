@@ -48,7 +48,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="max-content px-5 md:px-0 py-12 m:py-20">
-      <h1 className="text-2xl font-bold title-font text-gray-900 mb-3">
+      <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
         {post.title}
       </h1>
       <span className="mt-1 text-gray-500 text-base">

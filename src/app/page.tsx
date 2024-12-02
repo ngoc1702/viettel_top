@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Banner from "./component/banner";
 import DATA_MOTNTH from "./component/data_month";
+import Package_Data from "./component/package_data";
 
 export default function Home() {
   // const posts = await client.fetch(POSTS_QUERY);
@@ -34,12 +35,13 @@ export default function Home() {
 
     fetchPosts();
   }, []);
-  console.log(posts, "POOOOOOO");
+  // console.log(posts, "POOOOOOO");
 
   return (
-    <div>
+    <div >
       <Banner />
-      <DATA_MOTNTH />
+      {/* <Package_Data/> */}
+      {/* <DATA_MOTNTH /> */}
       <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-16 md:py-20 mx-auto">
           <div className="flex justify-between">
@@ -82,7 +84,7 @@ export default function Home() {
                               .replace(/\//g, "-")}
                           </p>
                         </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
+                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
                           <a
                             className="hover:text-[#CE2127]"
                             href={`/posts/${post?.slug.current}`}
@@ -188,7 +190,7 @@ export default function Home() {
                               .replace(/\//g, "-")}
                           </p>
                         </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
+                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
                           <a
                             className="hover:text-[#CE2127]"
                             href={`/posts/${post?.slug.current}`}

@@ -15,8 +15,8 @@ export default function Header() {
     setIsModalOpen(false);
   };
   return (
-    <div className="  box-shadow-basic text-gray-600 body-font">
-      <div className="container max-content mx-auto flex md:flex-wrap p-5 flex-row justify-between items-start md:items-center">
+    <div className=" w-full z-100 bg-[white]  box-shadow-basic text-gray-600 body-font">
+      <div className=" container max-content mx-auto flex md:flex-wrap p-5 flex-row justify-between items-start md:items-center">
         <a className="flex title-font font-medium items-center text-gray-900 mb-0 cursor-pointer">
           <Image src={logo} alt="Logo" width={170} />
         </a>
