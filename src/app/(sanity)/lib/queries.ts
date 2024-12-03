@@ -34,7 +34,6 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
 
 export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.current)][0...12]{
   _id, title, slug, traffic, price, time,
-  "authorName": author->name,
     mainImage {
       asset-> {
         url
@@ -50,16 +49,8 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.cu
 
 export const POST_QUERY2 = defineQuery(`*[_type == "package" && slug.current == $slug][0]{
   title, body, mainImage,slug, traffic, price, time,
-  "authorName": author->name,
-    mainImage {
-      asset-> {
-        url
-      },
-      alt
-    },
     categories[]-> {
       title
     },
     publishedAt,
-    body
 }`)

@@ -19,21 +19,16 @@ export const packageType = defineType({
       },
     }),
     defineField({
-      name: 'Traffic',
+      name: 'traffic',
       type: 'string',
     }),
     defineField({
-      name: 'Price',
+      name: 'price',
       type: 'string',
     }),
     defineField({
-      name: 'Time',
+      name: 'time',
       type: 'string',
-    }),
-    defineField({
-      name: 'author',
-      type: 'reference',
-      to: {type: 'author'},
     }),
     defineField({
       name: 'mainImage',
@@ -51,12 +46,8 @@ export const packageType = defineType({
     }),
     defineField({
       name: 'categories',
-      type: 'array',
+       type: 'array',
       of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
     }),
     defineField({
       name: 'body',

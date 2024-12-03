@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Banner from "./component/banner";
-import DATA_MOTNTH from "./component/data_month";
-import Package_Data from "./component/package_data";
+import DATA_MONTH from "./component/data_month";
+import DATA_DAY from "./component/data_day";
 
 export default function Home() {
   // const posts = await client.fetch(POSTS_QUERY);
@@ -40,8 +40,8 @@ export default function Home() {
   return (
     <div >
       <Banner />
-      {/* <Package_Data/> */}
-      {/* <DATA_MOTNTH /> */}
+      <DATA_MONTH/>
+      <DATA_DAY/>
       <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-16 md:py-20 mx-auto">
           <div className="flex justify-between">

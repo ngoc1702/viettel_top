@@ -1,5 +1,5 @@
 import React from 'react'
-import Package_Data from '../component/package_data'
+import Package_Data from '../component/data_day'
 
 export default function page() {
   return (

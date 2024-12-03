@@ -11,17 +11,17 @@ import Image from "next/image";
 import tv360 from "@public/assets/img/tv360.svg";
 import mybox from "@public/assets/img/mybox.svg";
 
-export default function DATA_MONTH() {
+export default function DATA_DAY() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<any>(null);
+  const [selectedPost, setSelectedPost] = useState<any>(null); // State for selected post
 
   const handleOpenPopup = (post: any) => {
-    setSelectedPost(post); 
+    setSelectedPost(post); // Set the selected post
     setIsPopupVisible(true);
   };
   const handleClosePopup = () => {
     setIsPopupVisible(false);
-    setSelectedPost(null); 
+    setSelectedPost(null); // Reset selected post when closing the popup
   };
 
   const [posts, setPosts] = useState<any[]>([]);
@@ -48,16 +48,13 @@ export default function DATA_MONTH() {
 
     fetchPosts();
   }, []);
-  console.log(posts,"POSTTTTTTT");
-  // console.log({post?.categories?.title},"CATERGOTYS");
-  
 
   return (
-    <div className="max-content px-5 md:px-0 py-16 md:py-20">
+    <div className="max-content px-5 md:px-0  ">
       <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
         <span className=" text-[#141718]">Gói Cước</span>
         <span className=" text-[#CE2127]"> Data 4G 5G</span>
-        <span className=" text-[#141718]"> Viettel tháng</span>
+        <span className=" text-[#141718]"> Viettel Ngày</span>
       </h1>
       <div className="hidden md:block gap-4 mt-10 w-full">
         <section className="text-gray-600 body-font overflow-hidden">
