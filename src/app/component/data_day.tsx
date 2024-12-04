@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -22,6 +23,13 @@ export default function DATA_DAY() {
   const handleClosePopup = () => {
     setIsPopupVisible(false);
     setSelectedPost(null); // Reset selected post when closing the popup
+  };
+
+  const [isContentVisible, setIsContentVisible] = useState(true);
+  
+  // Hàm xử lý khi bấm nút
+  const toggleContent = () => {
+    setIsContentVisible((prev) => !prev);
   };
 
   const [posts, setPosts] = useState<any[]>([]);
@@ -51,16 +59,33 @@ export default function DATA_DAY() {
 
   return (
     <div className="max-content px-5 md:px-0  ">
+      <div className="flex justify-between items-center">
       <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
         <span className=" text-[#141718]">Gói Cước</span>
         <span className=" text-[#CE2127]"> Data 4G 5G</span>
-        <span className=" text-[#141718]"> Viettel Ngày</span>
+        <span className=" text-[#141718]"> Viettel ngày</span>
       </h1>
-      <div className="hidden md:block gap-4 mt-10 w-full">
+      <button  onClick={toggleContent} className="md:w-12 md:h-12   md:bg-gray-200  rounded-full items-center">
+      {isContentVisible ? (
+          <FontAwesomeIcon icon={faCaretUp} />
+        ) : (
+          <FontAwesomeIcon icon={faCaretDown} />
+        )}
+      </button>
+   
+      </div>
+      {isContentVisible && (
+      <div className="content hidden md:block gap-4 mt-10 w-full">
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4">
-            {posts.map((post: any) => (
-              <div key={post._id}>
+          {posts
+              .filter((post: any) =>
+                post.categories?.some(
+                  (category: any) => category.title === "Ngày"
+                )
+              )
+              .map((post: any) => (
+                <div key={post._id}>
                 <div className="p-4 w-full">
                   <div className="items-center h-full p-6 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
                     <span className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b">
@@ -107,9 +132,10 @@ export default function DATA_DAY() {
           </div>
         </section>
       </div>
-
+       )}
       {/* Swiper mobile */}
-      <div className="block md:hidden mt-8">
+      {isContentVisible && (
+      <div className="content block md:hidden mt-8">
         <Swiper
           spaceBetween={20}
           slidesPerView={2}
@@ -117,8 +143,14 @@ export default function DATA_DAY() {
           autoplay={{ delay: 2500 }}
           className="mySwiper"
         >
-          {posts.map((post: any) => (
-            <div key={post._id}>
+           {posts
+              .filter((post: any) =>
+                post.categories?.some(
+                  (category: any) => category.title === "Ngày"
+                )
+              )
+              .map((post: any) => (
+                <div key={post._id}>
               <SwiperSlide className="flex justify-center items-center ">
                 <div className=" w-full">
                   <div className=" items-center  h-full px-[6px] py-4 rounded-lg border-2 border-[#CE2127] flex flex-col relative overflow-hidden">
@@ -166,6 +198,7 @@ export default function DATA_DAY() {
           ))}
         </Swiper>
       </div>
+      )}
       {/* Popup */}
       {isPopupVisible && selectedPost && (
         <div className="fixed inset-0 z-50 px-5 flex items-center justify-center bg-black bg-opacity-50">
