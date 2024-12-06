@@ -28,6 +28,13 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     categories[]-> {
       title
     },
+    gallery[] {
+      asset-> {
+        _id,
+        url
+      },
+      caption
+    },
     publishedAt,
     body
 }`)
@@ -42,6 +49,13 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.cu
     },
     categories[]-> {
       title
+    },
+    gallery[] {
+      asset-> {
+        _id,
+        url
+      },
+      caption
     },
     _createdAt,
     body

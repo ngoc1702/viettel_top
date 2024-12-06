@@ -8,6 +8,7 @@ import "swiper/css";
 import Banner from "./component/banner";
 import DATA_MONTH from "./component/data_month";
 import DATA_DAY from "./component/data_day";
+import DATA_MORE from "./component/data_more";
 
 export default function Home() {
   // const posts = await client.fetch(POSTS_QUERY);
@@ -42,6 +43,7 @@ export default function Home() {
       <Banner />
       <DATA_MONTH/>
       <DATA_DAY/>
+      <DATA_MORE/>
       <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-16 md:py-20 mx-auto">
           <div className="flex justify-between">

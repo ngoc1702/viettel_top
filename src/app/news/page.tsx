@@ -33,12 +33,12 @@ export default function page() {
     fetchPosts();
   }, []);
   return (
-    <div className='max-content'>
-         <section className="text-gray-600 body-font max-content ">
+    <div className='max-content mt-12'>
+      <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-16 md:py-20 mx-auto">
-            <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
-              <span className=" text-[#CE2127]">Tin Nổi Bật</span>
-            </h1>
+          <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
+            <span className=" text-[#CE2127]">Tin Nổi Bật</span>
+          </h1>
           <div className="flex -m-4  mt-4">
             {posts
               .sort(
@@ -140,11 +140,11 @@ export default function page() {
 
         </div>
       </section>
-     <section className="text-gray-600 body-font max-content ">
+      <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-16 md:py-20 mx-auto">
-            <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
-              <span className=" text-[#CE2127]">Tin Mới Nhất</span>
-            </h1>
+          <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
+            <span className=" text-[#CE2127]">Tin Mới Nhất</span>
+          </h1>
           <div className="md:grid md:grid-cols-3 hidden -m-4 mt-2">
             {posts
               .sort(
@@ -252,66 +252,66 @@ export default function page() {
               className="mySwiper"
             >
               {posts
-              .sort(
-                (a: any, b: any) =>
-                  new Date(b._createdAt).getTime() -
-                  new Date(a._createdAt).getTime()
-              )
-              .slice(0, 3)
-              .map((post: any) => (
-                <div key={post._id}>
-                  <SwiperSlide className="flex justify-center items-center ">
-                    <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                      <img
-                        className="lg:h-60 md:h-36 w-full object-cover object-center"
-                        src={post.mainImage?.asset?.url}
-                        alt="blog"
-                      />
-                      <div className="p-6">
-                        <div className="flex justify-between">
-                          <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {post.categories
-                              ?.map((cat: any) => cat.title)
-                              .join(", ") || "No categories"}
-                          </h2>
-                          <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {new Date(post?._createdAt)
-                              .toLocaleDateString("en-GB")
-                              .replace(/\//g, "-")}
-                          </p>
-                        </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
-                          <a
-                            className="hover:text-[#CE2127]"
-                            href={`/posts/${post?.slug.current}`}
-                          >
-                            {post?.title}
-                          </a>
-                        </h1>
-
-                        <p className="mt-1 leading-relaxed mb-3">
-                          {post.authorName || "No author"}
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <a
-                            href={`/posts/${post?.slug.current}`}
-                            className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
-                          >
-                            <span>Xem thêm </span>
-                            <svg
-                              className="w-4 h-4 ml-2"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                .sort(
+                  (a: any, b: any) =>
+                    new Date(b._createdAt).getTime() -
+                    new Date(a._createdAt).getTime()
+                )
+                .slice(0, 3)
+                .map((post: any) => (
+                  <div key={post._id}>
+                    <SwiperSlide className="flex justify-center items-center ">
+                      <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <img
+                          className="lg:h-60 md:h-36 w-full object-cover object-center"
+                          src={post.mainImage?.asset?.url}
+                          alt="blog"
+                        />
+                        <div className="p-6">
+                          <div className="flex justify-between">
+                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                              {post.categories
+                                ?.map((cat: any) => cat.title)
+                                .join(", ") || "No categories"}
+                            </h2>
+                            <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                              {new Date(post?._createdAt)
+                                .toLocaleDateString("en-GB")
+                                .replace(/\//g, "-")}
+                            </p>
+                          </div>
+                          <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
+                            <a
+                              className="hover:text-[#CE2127]"
+                              href={`/posts/${post?.slug.current}`}
                             >
-                              <path d="M5 12h14" />
-                              <path d="M12 5l7 7-7 7" />
-                            </svg>
-                          </a>
-                          {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                              {post?.title}
+                            </a>
+                          </h1>
+
+                          <p className="mt-1 leading-relaxed mb-3">
+                            {post.authorName || "No author"}
+                          </p>
+                          <div className="flex items-center flex-wrap ">
+                            <a
+                              href={`/posts/${post?.slug.current}`}
+                              className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
+                            >
+                              <span>Xem thêm </span>
+                              <svg
+                                className="w-4 h-4 ml-2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                              </svg>
+                            </a>
+                            {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                             <svg
                               className="w-4 h-4 mr-1"
                               stroke="currentColor"
@@ -340,12 +340,12 @@ export default function page() {
                             </svg>
                             6
                           </span> */}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                </div>
-              ))}
+                    </SwiperSlide>
+                  </div>
+                ))}
             </Swiper>
           </div>
         </div>

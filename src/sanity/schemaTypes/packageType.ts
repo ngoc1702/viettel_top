@@ -30,6 +30,30 @@ export const packageType = defineType({
       name: 'time',
       type: 'string',
     }),
+
+    defineField({
+      name: "gallery", // Tên trường
+      title: "Gallery", // Tiêu đề hiển thị
+      type: "array", // Kiểu dữ liệu là mảng
+      of: [
+        {
+          type: "image", 
+          options: {
+            hotspot: true, 
+          },
+          // fields: [
+          //   {
+          //     name: "caption",
+          //     type: "string",
+          //     title: "Caption",
+          //     options: {
+          //       isHighlighted: true, 
+          //     },
+          //   },
+          // ],
+        },
+      ],
+    }),
     defineField({
       name: 'mainImage',
       type: 'image',

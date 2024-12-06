@@ -15,8 +15,8 @@ export default function Header() {
     setIsModalOpen(false);
   };
   return (
-    <div className=" w-full z-100 bg-[white]  box-shadow-basic text-gray-600 body-font">
-      <div className=" container max-content mx-auto flex md:flex-wrap p-5 flex-row justify-between items-start md:items-center">
+    <div className="fixed top-0 left-0 right-0 w-full z-10 bg-[white]  box-shadow-basic text-gray-600 body-font ">
+      <div className=" bg-[white] container max-content mx-auto flex md:flex-wrap p-5 flex-row justify-between items-start md:items-center">
         <a className="flex title-font font-medium items-center text-gray-900 mb-0 cursor-pointer">
           <Image src={logo} alt="Logo" width={170} />
         </a>
@@ -117,7 +117,7 @@ export default function Header() {
                   />
                 </svg>
               </div>
-              <div className="h-screen mt-[35px] p-8 absolute z-50 bg-white top-14 left-0 right-0 md:relative md:top-0 md:bg-transparent items-stretch flex flex-col md:flex-row gap-5">
+              <div className="h-screen mt-[32px] p-8 absolute z-50 bg-white top-14 left-0 right-0 md:relative md:top-0 md:bg-transparent items-stretch flex flex-col md:flex-row gap-5">
                 <div className="text-gray-700  text-[18px] font-medium leading-6  whitespace-nowrap">
                   <a href="/">Trang chủ</a>
                 </div>

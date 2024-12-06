@@ -12,7 +12,7 @@ import Image from "next/image";
 import tv360 from "@public/assets/img/tv360.svg";
 import mybox from "@public/assets/img/mybox.svg";
 
-export default function DATA_DAY() {
+export default function DATA_MORE() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any>(null); // State for selected post
 
@@ -58,12 +58,12 @@ export default function DATA_DAY() {
   }, []);
 
   return (
-    <div className="max-content px-5 md:px-0  z-1">
+    <div className="max-content px-5 md:px-0 py-16 md:py-20 z-1">
       <div className="flex justify-between items-center">
         <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
           <span className=" text-[#141718]">Gói Cước</span>
           <span className=" text-[#CE2127]"> Data 4G 5G</span>
-          <span className=" text-[#141718]"> Viettel ngày</span>
+          <span className=" text-[#141718]"> Viettel khác</span>
         </h1>
         <button
           onClick={toggleContent}

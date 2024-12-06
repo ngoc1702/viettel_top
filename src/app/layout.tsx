@@ -29,19 +29,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
+
     <html lang="en">
-  <head>
-   <meta name="description" content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)" />
-   <meta name="keywords" content="Next.js, SEO, React, thẻ meta" />
-   <meta name="author" content="Tên của bạn hoặc công ty" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-    <Header /> 
-    <div >{children} </div>
-    <Footer /> 
-  </body>
-</html>
+      <head>
+        <meta name="description" content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)" />
+        <meta name="keywords" content="Next.js, SEO, React, thẻ meta" />
+        <meta name="author" content="Tên của bạn hoặc công ty" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Header />
+        <div >{children} </div>
+        <Footer />
+      </body>
+    </html>
   );
 }

@@ -58,48 +58,48 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const post = await fetchPost(slug);
 
   return (
-    <div className="max-content px-5 md:px-0 py-12 m:py-20">
+    <div className="max-content px-5 md:px-0 py-12 m:py-20 mt-20">
       <h1 className="text-4xl font-bold title-font  text-gray-900 mb-3">
         GÓI CƯỚC <span className="text-[#CE2127]"> {post.title}</span>
       </h1>
       {/* <span className="mt-1 text-gray-500 text-base">
          {new Date(post?._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
       </span> */}
-     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
+     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
   
-    <div className="h-full bg-gray-100 p-6 rounded-xl">
+    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Price} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
           <span className="title-font font-medium text-gray-600 ">Cước phí</span>
-          <span className="text-gray-900 text-3xl font-bold mt-1">{post?.price}</span>
+          <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">{post?.price}</span>
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-6 rounded-xl">
+    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Clock} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
           <span className="title-font font-medium text-gray-600 ">Thời hạn sử dụng</span>
-          <span className="text-gray-900 text-3xl font-bold mt-1">{post?.time}</span>
+          <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">{post?.time}</span>
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-6 rounded-xl">
+    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Traffic} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
           <span className="title-font font-medium text-gray-600 ">Dung lượng tốc độ cao</span>
-          <span className="text-gray-900 text-3xl font-bold mt-1">{post?.traffic}/ngày</span>
+          <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">{post?.traffic}/ngày</span>
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-6 rounded-xl">
+    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={SMS} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
           <span className="title-font font-medium text-gray-600 ">Cú pháp đăng ký  SMS</span>
-          <span className="text-gray-900 text-3xl font-bold mt-1">{post?.title} <span className="text-base text-[#CE2127]">gửi 290</span></span> 
+          <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">{post?.title} <span className="text-base text-[#CE2127]">gửi 290</span></span> 
         </span>
       </a>
     </div>
