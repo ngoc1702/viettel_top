@@ -73,6 +73,13 @@ export const packageType = defineType({
        type: 'array',
       of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
     }),
+
+    defineField({
+      name: 'sub_categories',
+       type: 'array',
+      of: [defineArrayMember({type: 'reference', to: {type: 'sub_category'}})],
+    }),
+
     defineField({
       name: 'body',
       type: 'blockContent',

@@ -39,7 +39,7 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     body
 }`)
 
-export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.current)][0...12]{
+export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.current)][0...12]{
   _id, title, slug, traffic, price, time,
     mainImage {
       asset-> {
@@ -47,7 +47,10 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.cu
       },
       alt
     },
-    categories[]-> {
+   categories[]-> {
+      title
+    },
+    sub_categories[]-> {
       title
     },
     gallery[] {
@@ -61,9 +64,44 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && defined(slug.cu
     body
 }`)
 
+// export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && !defined(subCategory) && defined(slug.current)][0...12]{
+//   _id, 
+//   title, 
+//   slug, 
+//   traffic, 
+//   price, 
+//   time,
+//   mainImage {
+//     asset-> {
+//       url
+//     },
+//     alt
+//   },
+//   categories[]-> {
+//     title,
+//     "subCategories": *[_type == "category" && subCategory._ref == ^._id] {
+//       title,
+//       slug
+//     }
+//   },
+//   gallery[] {
+//     asset-> {
+//       _id,
+//       url
+//     },
+//     caption
+//   },
+//   _createdAt,
+//   body
+// }`);
+
+
 export const POST_QUERY2 = defineQuery(`*[_type == "package" && slug.current == $slug][0]{
   title, body, mainImage,slug, traffic, price, time,
     categories[]-> {
+      title
+    },
+   sub_categories[]-> {
       title
     },
     publishedAt,

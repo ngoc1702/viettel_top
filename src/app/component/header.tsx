@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@public/assets/img/logo.png";
+import logo from "@public/assets/img/viettel.svg";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);

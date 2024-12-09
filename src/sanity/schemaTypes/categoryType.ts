@@ -22,5 +22,11 @@ export const categoryType = defineType({
       name: 'description',
       type: 'text',
     }),
+    // defineField({
+    //   name: 'subCategory',
+    //   title: 'Sub Category',
+    //   type: 'reference',
+    //   to: [{ type: 'category' }], 
+    // }),
   ],
 })

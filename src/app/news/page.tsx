@@ -155,7 +155,7 @@ export default function page() {
               .map((post: any) => (
                 <div key={post._id}>
                   <div className="p-4 ">
-                    <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                    <div className="h-full border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
                       <img
                         className="lg:h-60 md:h-36 w-full object-cover object-center"
                         src={post.mainImage?.asset?.url}
@@ -261,7 +261,7 @@ export default function page() {
                 .map((post: any) => (
                   <div key={post._id}>
                     <SwiperSlide className="flex justify-center items-center ">
-                      <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                      <div className="h-full  border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
                         <img
                           className="lg:h-60 md:h-36 w-full object-cover object-center"
                           src={post.mainImage?.asset?.url}

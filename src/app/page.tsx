@@ -41,6 +41,11 @@ export default function Home() {
   return (
     <div >
       <Banner />
+      <section className="mt-6 px-4 md:px-0 mx-auto text-center">
+        <p className="uppercase font-bold text-[20px] leading-[50px] max-md:max-w-full max-md:text-lg max-md:leading-[50px]">GÓI CƯỚC DATA 4G 5G VIETTEL</p>
+       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Đăng ký gói cước data 4G 5G tốc độ cao dễ dàng cùng Viettelup.vn!</p>
+       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Viettel Up là website phù hợp với giới trẻ, cung cấp thông tin đầy đủ và chính xác mọi dịch vụ, khuyến mại của Viettel.</p>
+      </section>
       <DATA_MONTH/>
       <DATA_DAY/>
       <DATA_MORE/>
@@ -51,7 +56,7 @@ export default function Home() {
               <span className=" text-[#141718]">Tin tức</span>
             </h1>
             <a href="/news">
-              <button className="min-w-[120px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded font-semibold">
+              <button className="min-w-[120px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded-[25px] font-semibold">
                 Xem tất cả
               </button>
             </a>
@@ -67,7 +72,7 @@ export default function Home() {
               .map((post: any) => (
                 <div key={post._id}>
                   <div className="p-4 ">
-                    <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                    <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
                       <img
                         className="lg:h-60 md:h-36 w-full object-cover object-center"
                         src={post.mainImage?.asset?.url}
@@ -173,7 +178,7 @@ export default function Home() {
               .map((post: any) => (
                 <div key={post._id}>
                   <SwiperSlide className="flex justify-center items-center ">
-                    <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                    <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
                       <img
                         className="lg:h-60 md:h-36 w-full object-cover object-center"
                         src={post.mainImage?.asset?.url}
