@@ -17,7 +17,7 @@ export default function Footer() {
               src={logo}
               alt="Logo"
               width={240}
-              className="w-[200px] md:w-[240px]"
+              className="w-[170px] md:w-[240px]"
             />
           </a>
           <p className="mt-4 text-base text-gray-500">
