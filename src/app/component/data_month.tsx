@@ -103,11 +103,12 @@ export default function DATA_MONTH() {
 
                 return (
                   <div className="mt-6" key={title}>
-                    <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[50px]">
-                      Gói cước {title}
-                    </h3>
                     {/* Tên sub_category.title */}
                     {filteredPosts.map((post: any) => (
+                      <div>
+                         <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[50px]">
+                      Gói cước {title}
+                    </h3>
                       <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1">
                         <div key={post._id}>
                           <div className="p-4 w-full ">
@@ -170,6 +171,7 @@ export default function DATA_MONTH() {
                             </div>
                           </div>
                         </div>
+                      </div>
                       </div>
                     ))}
                   </div>
