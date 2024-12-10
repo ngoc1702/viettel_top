@@ -12,12 +12,15 @@ export default function Footer() {
     <footer id="footer" className="box-shadow-basic text-gray-600 body-font">
       <div className="text-left max-content container  md:gap-12 px-5 py-16 md:py-20  flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="lg:w-1/3 md:w-1/3 flex-shrink-0 md:mx-0  text-left">
+        <h2 className="title-font font-semibold text-gray-900 tracking-widest text-sm mb-3">
+             ĐƠN VỊ CUNG CẤP
+            </h2>
           <a href="">
             <Image
               src={logo}
               alt="Logo"
               width={240}
-              className="w-[200px] md:w-[240px]"
+              className="w-[170px] md:w-[240px]"
             />
           </a>
           <p className="mt-4 text-base text-gray-500">
@@ -46,6 +49,9 @@ export default function Footer() {
             </nav>
           </div>
           <div className="lg:w-1/2 md:w-1/2 w-full md:px-4">
+          <h2 className="title-font font-semibold text-gray-900 tracking-widest text-sm mb-3 text-start">
+              LIÊN HỆ
+            </h2>
             <address className="flex flex-col flex-1 items-start w-full max-md:mt-0 max-md:max-w-full not-italic">
               <div className="flex gap-5 text-left items-center w-full leading-8 max-md:max-w-full">
                 <FontAwesomeIcon icon={faLocationDot} width={29} />

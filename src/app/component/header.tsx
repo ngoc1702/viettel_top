@@ -18,7 +18,7 @@ export default function Header() {
     <div className="fixed top-0 left-0 right-0 w-full z-10 bg-[white]  box-shadow-basic text-gray-600 body-font ">
       <div className=" bg-[white] container max-content mx-auto flex md:flex-wrap p-5 flex-row justify-between items-start md:items-center">
         <a className="flex title-font font-medium items-center text-gray-900 mb-0 cursor-pointer">
-          <Image src={logo} alt="Logo" width={170} />
+          <Image src={logo} alt="Logo" width={170} className="w-[120px] md:w-[170px] md:mt-0 mt-1"/>
         </a>
         <nav className="md:ml-auto md:mr-auto hidden md:flex flex-wrap items-center text-lg font-medium justify-center">
           <Link href="/" className="mr-12 hover:text-gray-900 cursor-pointer">

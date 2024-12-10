@@ -9,7 +9,7 @@ import Home from "./page";
 import Header from "./component/header";
 import Footer from "./component/footer";
 import { Provider } from "react";
-import logo from "@public/assets/img/logo.png";
+import logo from "@public/assets/img/favicon.ico";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -70,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+      <link rel="icon" href="/assets/img/favicon.svg" sizes="32x16" />
         <meta
           name="description"
           content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)"
@@ -77,7 +78,7 @@ export default function RootLayout({
         <meta name="keywords" content="Next.js, SEO, React, thẻ meta" />
         <meta name="author" content="Tên của bạn hoặc công ty" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="@app/favicon.png" />
+       
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
