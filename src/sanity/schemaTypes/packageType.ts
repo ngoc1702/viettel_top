@@ -41,16 +41,7 @@ export const packageType = defineType({
           options: {
             hotspot: true, 
           },
-          // fields: [
-          //   {
-          //     name: "caption",
-          //     type: "string",
-          //     title: "Caption",
-          //     options: {
-          //       isHighlighted: true, 
-          //     },
-          //   },
-          // ],
+         
         },
       ],
     }),
@@ -83,6 +74,11 @@ export const packageType = defineType({
     defineField({
       name: 'body',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'globalField',
+      type: 'reference',
+      to: {type: 'global'},
     }),
   ],
   preview: {

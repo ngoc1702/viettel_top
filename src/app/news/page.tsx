@@ -33,9 +33,9 @@ export default function page() {
     fetchPosts();
   }, []);
   return (
-    <div className='max-content mt-12'>
+    <div className='max-content mt-16'>
       <section className="text-gray-600 body-font max-content ">
-        <div className="container px-5 py-16 md:py-20 mx-auto">
+        <div className="container px-5 py-12 md:py-20 mx-auto">
           <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
             <span className=" text-[#CE2127]">Tin Nổi Bật</span>
           </h1>
@@ -141,7 +141,7 @@ export default function page() {
         </div>
       </section>
       <section className="text-gray-600 body-font max-content ">
-        <div className="container px-5 py-16 md:py-20 mx-auto">
+        <div className="container px-5 py-10 md:py-20 mx-auto">
           <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
             <span className=" text-[#CE2127]">Tin Mới Nhất</span>
           </h1>

@@ -10,8 +10,9 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('category').title('Categories'),
       S.documentTypeListItem('sub_category').title('Sub Categories'),
       S.documentTypeListItem('author').title('Authors'),
+      S.documentTypeListItem('global').title('Global'),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !['post','package', 'category', 'sub_category' ,'author'].includes(item.getId()!),
+        (item) => item.getId() && !['post','package', 'category', 'sub_category' ,'author', 'global'].includes(item.getId()!),
       ),
     ])

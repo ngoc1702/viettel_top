@@ -97,10 +97,16 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={SMS} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
-        <span className="flex-grow flex flex-col pl-4">
-          <span className="title-font font-medium text-gray-600 ">Cú pháp đăng ký  SMS</span>
+        <button  onClick={() => {
+                                    const message = encodeURIComponent(
+                                      post.title
+                                    ); 
+                                    window.location.href = `sms:+84987654321?body=${message}`;
+                                  }}
+        className="flex-grow flex flex-col pl-4">
+          <span className="title-font font-medium text-gray-600 ">Cú pháp đăng ký SMS</span>
           <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">{post?.title} <span className="text-base text-[#CE2127]">gửi 290</span></span> 
-        </span>
+        </button>
       </a>
     </div>
 

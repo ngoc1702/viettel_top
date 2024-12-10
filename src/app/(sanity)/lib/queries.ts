@@ -61,7 +61,8 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.c
       caption
     },
     _createdAt,
-    body
+    body,
+    "globalField": *[_type == "global"][0].globalField
 }`)
 
 // export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && !defined(subCategory) && defined(slug.current)][0...12]{
@@ -105,4 +106,5 @@ export const POST_QUERY2 = defineQuery(`*[_type == "package" && slug.current == 
       title
     },
     publishedAt,
+    "globalField": *[_type == "global"][0].globalField
 }`)

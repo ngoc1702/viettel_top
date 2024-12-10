@@ -197,7 +197,7 @@ export default function DATA_MORE() {
 
                 {filteredPosts.map((post: any) => (
                   <div>
-                    <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[50px]">
+                    <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                     Gói cước {title}
                   </h3>
                   <Swiper
@@ -254,12 +254,18 @@ export default function DATA_MORE() {
                               </span>
                             </h2>
                             <div className="flex flex-col gap-2">
-                              <button
-                                onClick={() => handleOpenPopup(post)}
-                                className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4  focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
-                              >
-                                Đăng ký
-                              </button>
+                            <button
+                                  className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
+                                  onClick={() => {
+                                    const phoneNumber = "290";
+                                    const message = encodeURIComponent(
+                                      ` ${post.title} ${post.globalField}!`
+                                    );
+                                    window.location.href = `sms:${phoneNumber}?body=${message}`;
+                                  }}
+                                >
+                                  Đăng ký
+                                </button>
                               {/* <a href={`/package/${post?.slug.current}`}>
                             <button className="min-w-[100px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded font-semibold">
                               Chi tiết
@@ -287,7 +293,7 @@ export default function DATA_MORE() {
             <span className="mb-4">
               Để đăng ký gói cước, vui lòng soạn tin nhắn trên điện thoại theo
               cú pháp
-              <span className="text-[#CE2127]"> {selectedPost?.title}</span> gửi{" "}
+              <span className="text-[#CE2127]"> {selectedPost?.title} {selectedPost?.globalField}</span> gửi{" "}
               <span className="text-[#CE2127]">290</span>. Để xem các thuê bao
               áp dụng gói cước trên, vui lòng kiểm tra tại link dưới.
             </span>
