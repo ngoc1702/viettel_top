@@ -67,7 +67,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
       </span> */}
      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
   
-    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
+    <div className="h-full bg-white p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Price} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
@@ -76,7 +76,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
+    <div className="h-full bg-white p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Clock} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
@@ -85,7 +85,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
+    <div className="h-full bg-white p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={Traffic} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <span className="flex-grow flex flex-col pl-4">
@@ -94,7 +94,7 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </span>
       </a>
     </div>
-    <div className="h-full bg-gray-100 p-4 md:p-6 rounded-xl">
+    <div className="h-full bg-white p-4 md:p-6 rounded-xl">
       <a className="inline-flex items-center">
         <Image alt="testimonial" src={SMS} className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
         <button  onClick={() => {
