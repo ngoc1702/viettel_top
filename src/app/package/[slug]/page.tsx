@@ -2,6 +2,7 @@
 import { client } from "../../../sanity/lib/client";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
+import { PortableTextComponentProps, PortableTextBlock } from '@portabletext/react';
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Price from "@public/assets/img/cuoc.svg";
@@ -14,13 +15,25 @@ interface Post {
   traffic:string;
   price:string;
   time:string;
-  mainImage: any;
+  mainImage: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
   _createdAt: string;
-  body: any;
+  body: PortableTextBlock[];
   slug: {
     current: string;
   };
 }
+type ImageValue = {
+  _type: string;
+  asset: { _ref: string; _type: string };
+  alt?: string;
+  caption?: string;
+};
+
 
 const fetchPost = async (slug: string): Promise<Post> => {
   const query = groq`*[_type == "package" && slug.current == $slug][0]`;
@@ -35,7 +48,7 @@ const fetchPost = async (slug: string): Promise<Post> => {
 
 const PortableTextComponents = {
   types: {
-    image: ({ value }: { value: any }) => (
+    image: ({ value }: { value: ImageValue }) => (
       <div className="my-6">
         <img
           src={urlFor(value).url()}
@@ -49,7 +62,10 @@ const PortableTextComponents = {
     ),
   },
   block: {
-    normal: ({ children }: any) => <p className="mb-4">{children}</p>,
+    // Correct the type for block normal
+    normal: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
+      <p className="mb-4">{children}</p>
+    ),
   },
 };
 

@@ -17,3 +17,4 @@ function StudioPage() {
     </NextStudio>
   )
 }
+export default StudioPage;

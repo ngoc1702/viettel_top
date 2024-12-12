@@ -119,11 +119,11 @@ export default function Header() {
               </div>
               <div className="h-screen mt-[13px] p-8 absolute z-50 bg-white top-14 left-0 right-0 md:relative md:top-0 md:bg-transparent items-stretch flex flex-col md:flex-row gap-5">
                 <div className="text-gray-700  text-[18px] font-medium leading-6  whitespace-nowrap">
-                  <a href="/">Trang chủ</a>
+                  <Link href="/">Trang chủ</Link>
                 </div>
 
                 <div className="text-gray-700  text-[18px] font-medium leading-6  whitespace-nowrap">
-                  <a href="/news">Tin tức</a>
+                  <Link href="/news">Tin tức</Link>
                 </div>
               </div>
             </div>

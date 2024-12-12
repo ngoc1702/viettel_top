@@ -3,29 +3,54 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY2 } from "../(sanity)/lib/queries";
 import Image from "next/image";
-import tv360 from "@public/assets/img/tv360.svg";
-import mybox from "@public/assets/img/mybox.svg";
+interface Category {
+  title: string;
+}
+interface Sub_Category {
+  title: string;
+}
+
+interface Image {
+  asset: {
+    url: string;
+    _id: string; 
+  };
+  caption?: string; 
+}
+
+interface Post {
+  _id: number;
+  slug: {
+    current: string;
+  };
+  title: string;
+  traffic:string;
+  time:string;
+  price:string;
+  globalField: string;
+  categories: Category[];
+  sub_categories:Sub_Category[];
+  gallery: Image[];
+}
 
 export default function DATA_MONTH() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<any>(null);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-  const handleOpenPopup = (post: any) => {
+  const handleOpenPopup = (post: Post) => {
     setSelectedPost(post);
     setIsPopupVisible(true);
   };
   const handleClosePopup = () => {
     setIsPopupVisible(false);
-    setSelectedPost(null);
+    setSelectedPost(null); 
   };
 
-  // State để theo dõi trạng thái ẩn/hiện nội dung
   const [isContentVisible, setIsContentVisible] = useState(true);
 
   // Hàm xử lý khi bấm nút
@@ -33,42 +58,36 @@ export default function DATA_MONTH() {
     setIsContentVisible((prev) => !prev);
   };
 
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        setLoading(true);
         const posts = await client.fetch(POSTS_QUERY2);
 
         if (!posts) {
           throw new Error("Failed to fetch posts");
         }
         setPosts(posts);
-      } catch (err: any) {
-        setError(err.message);
-        console.error("Error fetching posts:", err);
+      } catch (error) {
+        console.log('Error', error);
       } finally {
-        setLoading(false);
+        console.error("Success");
       }
     };
-
     fetchPosts();
   }, []);
-  console.log(posts, "POSTTTTTTT");
-  // console.log({post?.categories?.title},"CATERGOTYS");
+
   const subCategoryTitles = [
     ...new Set(
-      posts.flatMap((post: any) =>
-        post.sub_categories?.map((sub_category: any) => sub_category.title)
-      )
-    ),
-  ];
+        posts.flatMap((post: Post) =>
+            post.sub_categories?.map((subCategory: Sub_Category) => subCategory.title) ?? []
+        )
+    )
+];
 
   return (
-    <div className="max-content px-5 md:px-0 py-16 md:py-20 z-1">
+    <div className="max-content px-5 md:px-0  z-1">
       <div className="flex justify-between items-center">
         <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
           <span className=" text-[#141718]">Gói Cước</span>
@@ -91,26 +110,22 @@ export default function DATA_MONTH() {
           <section className="text-gray-600 body-font overflow-hidden">
             <div>
               {subCategoryTitles.map((title) => {
-                const filteredPosts = posts.filter(
-                  (post) =>
-                    post.categories?.some(
-                      (category: any) => category.title === "Tháng"
-                    ) &&
-                    post.sub_categories?.some(
-                      (sub_category: any) => sub_category.title === title
-                    )
-                );
+               const filteredPosts = posts.filter(
+                (post: Post) =>
+                    post.categories?.some((category: Category) => category.title === "Tháng") &&
+                    post.sub_categories?.some((subCategory: Sub_Category) => subCategory.title === title)
+            );
 
                 return (
                   <div className="mt-6" key={title}>
                     {/* Tên sub_category.title */}
-                    {filteredPosts.map((post: any) => (
-                      <div >
-                        <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[50px]">
+                    {filteredPosts.map((post: Post) => (
+                      <div key={title}>
+                        <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                           Gói cước {title}
                         </h3>
                         <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1">
-                          <div >
+                          <div key={post._id}>
                             <div className="p-4 w-full ">
                               <div className="items-center h-full p-6 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                                 <span className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
@@ -129,7 +144,7 @@ export default function DATA_MONTH() {
                                 </h2>
 
                                 <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                  {post?.gallery?.map((image: any) => (
+                                {post?.gallery?.map((image: Image) => (
                                     <div key={image.asset._id}>
                                       <Image
                                         src={image.asset.url}
@@ -143,6 +158,10 @@ export default function DATA_MONTH() {
                                   ))}
                                 </span>
 
+                                {/* <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                            <Image src={tv360} alt="tv360" width={30} />
+                            <Image src={mybox} alt="mybox" width={30} />
+                          </span> */}
                                 <h2 className=" mt-4  font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                                   <span className="text-3xl text-gray-900">
                                     {post?.price}
@@ -177,7 +196,6 @@ export default function DATA_MONTH() {
           </section>
         </div>
       )}
-
       {/* Swiper mobile */}
       {isContentVisible && (
         <div className="content block md:hidden mt-8">
@@ -185,18 +203,18 @@ export default function DATA_MONTH() {
             const filteredPosts = posts.filter(
               (post) =>
                 post.categories?.some(
-                  (category: any) => category.title === "Tháng"
+                  (category: Category) => category.title === "Tháng"
                 ) &&
                 post.sub_categories?.some(
-                  (sub_category: any) => sub_category.title === title
+                  (sub_category: Sub_Category) => sub_category.title === title
                 )
             );
             return (
               <div className="mt-6" key={title}>
                 {/* Tên sub_category.title */}
 
-                {filteredPosts.map((post: any) => (
-                  <div>
+                {filteredPosts.map((post: Post) => (
+                  <div key={title}>
                     <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                       Gói cước {title}
                     </h3>
@@ -223,10 +241,10 @@ export default function DATA_MONTH() {
                                 </span>
                               </h1>
                               <h2 className="text-sm tracking-widest title-font  font-medium">
-                                MIỄN PHÍ {post?.global}
+                                MIỄN PHÍ
                               </h2>
                               <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                {post?.gallery?.map((image: any) => (
+                                {post?.gallery?.map((image: Image) => (
                                   <div
                                     key={image.asset._id}
                                     className="gallery-item"
@@ -253,7 +271,7 @@ export default function DATA_MONTH() {
                                 </span>
                               </h2>
                               <div className="flex flex-col gap-2">
-                              <button
+                                <button
                                   className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
                                   onClick={() => {
                                     const phoneNumber = "290";
@@ -265,6 +283,7 @@ export default function DATA_MONTH() {
                                 >
                                   Đăng ký
                                 </button>
+
                                 {/* <a href={`/package/${post?.slug.current}`}>
                             <button className="min-w-[100px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded font-semibold">
                               Chi tiết
@@ -292,9 +311,12 @@ export default function DATA_MONTH() {
             <span className="mb-4">
               Để đăng ký gói cước, vui lòng soạn tin nhắn trên điện thoại theo
               cú pháp
-              <span className="text-[#CE2127]"> {selectedPost?.title} {selectedPost?.globalField}</span> gửi{" "}
-              <span className="text-[#CE2127]">290 </span>. Để xem các thuê bao
-              áp dụng gói cước trên, vui lòng kiểm tra tại link dưới.
+              <span className="text-[#CE2127]">
+                {" "}
+                {selectedPost?.title} {selectedPost?.globalField}
+              </span>{" "}
+              gửi <span className="text-[#CE2127]">290</span>. Để xem các thuê
+              bao áp dụng gói cước trên, vui lòng kiểm tra tại link dưới.
             </span>
             <div className="flex justify-center gap-6 mt-6 text-center items-center">
               <button
@@ -322,3 +344,4 @@ export default function DATA_MONTH() {
     </div>
   );
 }
+

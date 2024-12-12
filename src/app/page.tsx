@@ -2,7 +2,6 @@
 import { client } from "./(sanity)/lib/client";
 import React, { useState, useEffect } from "react";
 import { POSTS_QUERY } from "./(sanity)/lib/queries";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Banner from "./component/banner";
@@ -10,34 +9,47 @@ import DATA_MONTH from "./component/data_month";
 import DATA_DAY from "./component/data_day";
 import DATA_MORE from "./component/data_more";
 
-export default function Home() {
-  // const posts = await client.fetch(POSTS_QUERY);
-  const [posts, setPosts] = useState<any[]>([]); // State for storing posts data
-  const [loading, setLoading] = useState<boolean>(true); // State for loading
-  const [error, setError] = useState<string>(""); // State for error message
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true); // Set loading state to true when the fetch starts
-        const posts = await client.fetch(POSTS_QUERY);
-
-        if (!posts) {
-          throw new Error("Failed to fetch posts");
-        }
-        setPosts(posts);
-      } catch (err: any) {
-        setError(err.message);
-        console.error("Error fetching posts:", err);
-      } finally {
-        setLoading(false);
-      }
+interface Category {
+  title: string;
+}
+interface Post {
+  sort(arg0: (a: number, b: number) => number): unknown;
+  _id: number;
+  slug: {
+    current: string;
+  };
+  title: string;
+  categories: Category[];
+  _createdAt:string;
+  mainImage: {
+    asset: {
+        url: string;
     };
-
-    fetchPosts();
-  }, []);
-  // console.log(posts, "POOOOOOO");
-
+};
+  authorName:string;
+ 
+}
+export default function Home() {
+  const [posts, setPosts] = useState<Post[] | null>(null);
+  
+    useEffect(() => {
+      const fetchPosts = async () => {
+        try {
+          const posts: Post[] = await client.fetch(POSTS_QUERY);
+  
+          if (!posts) {
+            throw new Error("Failed to fetch posts");
+          }
+          setPosts(posts);
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        } finally {
+          console.log("Fetch posts process complete");
+        }
+      };
+  
+      fetchPosts();
+    }, []);
   return (
     <div >
       <Banner />
@@ -62,14 +74,11 @@ export default function Home() {
             </a>
           </div>
           <div className="md:grid md:grid-cols-3 hidden -m-4 mt-2">
-            {posts
-              .sort(
-                (a: any, b: any) =>
-                  new Date(b._createdAt).getTime() -
-                  new Date(a._createdAt).getTime()
-              )
-              .slice(0, 3)
-              .map((post: any) => (
+          {posts &&
+        posts
+          .sort((a, b) => new Date(b._createdAt).getTime() - new Date(a._createdAt).getTime())
+          .slice(0, 3)
+          .map((post: Post) => (
                 <div key={post._id}>
                   <div className="p-4 ">
                     <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
@@ -82,7 +91,7 @@ export default function Home() {
                         <div className="flex justify-between">
                           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                             {post.categories
-                              ?.map((cat: any) => cat.title)
+                              ?.map((cat: Category) => cat.title)
                               .join(", ") || "No categories"}
                           </h2>
                           <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -168,14 +177,11 @@ export default function Home() {
               autoplay={{ delay: 2500 }}
               className="mySwiper"
             >
-              {posts
-              .sort(
-                (a: any, b: any) =>
-                  new Date(b._createdAt).getTime() -
-                  new Date(a._createdAt).getTime()
-              )
-              .slice(0, 3)
-              .map((post: any) => (
+              {posts &&
+        posts
+          .sort((a, b) => new Date(b._createdAt).getTime() - new Date(a._createdAt).getTime())
+          .slice(0, 3)
+          .map((post: Post) => (
                 <div key={post._id}>
                   <SwiperSlide className="flex justify-center items-center ">
                     <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
@@ -188,7 +194,7 @@ export default function Home() {
                         <div className="flex justify-between">
                           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                             {post.categories
-                              ?.map((cat: any) => cat.title)
+                              ?.map((cat: Category) => cat.title)
                               .join(", ") || "No categories"}
                           </h2>
                           <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">

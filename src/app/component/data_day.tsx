@@ -3,26 +3,54 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY2 } from "../(sanity)/lib/queries";
 import Image from "next/image";
-import tv360 from "@public/assets/img/tv360.svg";
-import mybox from "@public/assets/img/mybox.svg";
 
+
+
+interface Category {
+  title: string;
+}
+interface Sub_Category {
+  title: string;
+}
+
+interface Image {
+  asset: {
+    url: string;
+    _id: string; 
+  };
+  caption?: string; 
+}
+
+interface Post {
+  _id: number;
+  slug: {
+    current: string;
+  };
+  title: string;
+  traffic:string;
+  time:string;
+  price:string;
+  globalField: string;
+  categories: Category[];
+  sub_categories:Sub_Category[];
+  gallery: Image[];
+}
 export default function DATA_DAY() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<any>(null); // State for selected post
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-  const handleOpenPopup = (post: any) => {
-    setSelectedPost(post); // Set the selected post
+  const handleOpenPopup = (post: Post) => {
+    setSelectedPost(post);
     setIsPopupVisible(true);
   };
   const handleClosePopup = () => {
     setIsPopupVisible(false);
-    setSelectedPost(null); // Reset selected post when closing the popup
+    setSelectedPost(null); 
   };
 
   const [isContentVisible, setIsContentVisible] = useState(true);
@@ -32,38 +60,33 @@ export default function DATA_DAY() {
     setIsContentVisible((prev) => !prev);
   };
 
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        setLoading(true);
         const posts = await client.fetch(POSTS_QUERY2);
 
         if (!posts) {
           throw new Error("Failed to fetch posts");
         }
         setPosts(posts);
-      } catch (err: any) {
-        setError(err.message);
-        console.error("Error fetching posts:", err);
+      } catch (error) {
+        console.log('Error', error);
       } finally {
-        setLoading(false);
+        console.error("Success");
       }
     };
-
     fetchPosts();
   }, []);
 
   const subCategoryTitles = [
     ...new Set(
-      posts.flatMap((post: any) =>
-        post.sub_categories?.map((sub_category: any) => sub_category.title)
-      )
-    ),
-  ];
+        posts.flatMap((post: Post) =>
+            post.sub_categories?.map((subCategory: Sub_Category) => subCategory.title) ?? []
+        )
+    )
+];
 
   return (
     <div className="max-content px-5 md:px-0  z-1">
@@ -89,21 +112,17 @@ export default function DATA_DAY() {
           <section className="text-gray-600 body-font overflow-hidden">
             <div>
               {subCategoryTitles.map((title) => {
-                const filteredPosts = posts.filter(
-                  (post) =>
-                    post.categories?.some(
-                      (category: any) => category.title === "Ngày"
-                    ) &&
-                    post.sub_categories?.some(
-                      (sub_category: any) => sub_category.title === title
-                    )
-                );
+               const filteredPosts = posts.filter(
+                (post: Post) =>
+                    post.categories?.some((category: Category) => category.title === "Ngày") &&
+                    post.sub_categories?.some((subCategory: Sub_Category) => subCategory.title === title)
+            );
 
                 return (
                   <div className="mt-6" key={title}>
                     {/* Tên sub_category.title */}
-                    {filteredPosts.map((post: any) => (
-                      <div>
+                    {filteredPosts.map((post: Post) => (
+                      <div key={title}>
                         <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                           Gói cước {title}
                         </h3>
@@ -127,7 +146,7 @@ export default function DATA_DAY() {
                                 </h2>
 
                                 <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                  {post?.gallery?.map((image: any) => (
+                                {post?.gallery?.map((image: Image) => (
                                     <div key={image.asset._id}>
                                       <Image
                                         src={image.asset.url}
@@ -186,18 +205,18 @@ export default function DATA_DAY() {
             const filteredPosts = posts.filter(
               (post) =>
                 post.categories?.some(
-                  (category: any) => category.title === "Ngày"
+                  (category: Category) => category.title === "Ngày"
                 ) &&
                 post.sub_categories?.some(
-                  (sub_category: any) => sub_category.title === title
+                  (sub_category: Sub_Category) => sub_category.title === title
                 )
             );
             return (
               <div className="mt-6" key={title}>
                 {/* Tên sub_category.title */}
 
-                {filteredPosts.map((post: any) => (
-                  <div>
+                {filteredPosts.map((post: Post) => (
+                  <div key={title}>
                     <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                       Gói cước {title}
                     </h3>
@@ -227,7 +246,7 @@ export default function DATA_DAY() {
                                 MIỄN PHÍ
                               </h2>
                               <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                {post?.gallery?.map((image: any) => (
+                                {post?.gallery?.map((image: Image) => (
                                   <div
                                     key={image.asset._id}
                                     className="gallery-item"

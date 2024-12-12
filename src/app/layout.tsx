@@ -1,15 +1,12 @@
 "use client";
-import type { Metadata } from "next";
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import React, { useState, useEffect } from "react";
 import Loading from "./component/loading";
-import Home from "./page";
 import Header from "./component/header";
 import Footer from "./component/footer";
-import { Provider } from "react";
-import logo from "@public/assets/img/favicon.ico";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
