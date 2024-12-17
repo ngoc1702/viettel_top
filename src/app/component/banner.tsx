@@ -8,7 +8,7 @@ import banner2 from "@public/assets/img/Banner2.webp";
 
 export default function Banner() {
   return (
-    <div className="slider-container mt-[90px] z-1">
+    <div className="slider-container mt-[79px] md:mt-[90px] z-1">
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
