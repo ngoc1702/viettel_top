@@ -1,4 +1,3 @@
-"use client";
 import { client } from "../../../sanity/lib/client";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
@@ -13,7 +12,7 @@ import Clock from "@public/assets/img/clock.svg";
 import Traffic from "@public/assets/img/data.svg";
 import SMS from "@public/assets/img/sms (1).svg";
 
-
+// Define the Post interface
 interface Post {
   title: string;
   traffic: string;
@@ -31,6 +30,8 @@ interface Post {
     current: string;
   };
 }
+
+// Define the ImageValue type
 type ImageValue = {
   _type: string;
   asset: { _ref: string; _type: string };
@@ -38,17 +39,17 @@ type ImageValue = {
   caption?: string;
 };
 
+// Server-side data fetching function
 const fetchPost = async (slug: string): Promise<Post> => {
   const query = groq`*[_type == "package" && slug.current == $slug][0]`;
   const post = await client.fetch(query, { slug });
-  console.log(post, "AAAAAAAA");
-
   if (!post) {
     throw new Error("Post not found");
   }
   return post;
 };
 
+// Define PortableTextComponents for rendering PortableText
 const PortableTextComponents = {
   types: {
     image: ({ value }: { value: ImageValue }) => (
@@ -65,26 +66,29 @@ const PortableTextComponents = {
     ),
   },
   block: {
-    // Correct the type for block normal
     normal: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
       <p className="mb-4">{children}</p>
     ),
   },
 };
 
-const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const { slug } = await params;
-  const post = await fetchPost(slug);
+// Refactored Page Component
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params; // Resolving the promise to get the slug
+  const post = await fetchPost(slug); // Fetch the post based on slug
 
   return (
-    <div className="max-content px-5 md:px-0 py-12 m:py-20 mt-20">
-      <h1 className="text-4xl font-bold title-font  text-gray-900 mb-3">
+    <div className="relative">
+    <div className="max-content px-5 md:px-0 py-12 m:py-20 mt-20 relative">
+      <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
         GÓI CƯỚC <span className="text-[#CE2127]"> {post.title}</span>
       </h1>
-      {/* <span className="mt-1 text-gray-500 text-base">
-         {new Date(post?._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
-      </span> */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
+        {/* Displaying info blocks */}
         <div className="h-full bg-white p-4 md:p-6 rounded-xl">
           <a className="inline-flex items-center">
             <Image
@@ -93,11 +97,11 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
             />
             <span className="flex-grow flex flex-col pl-4">
-              <span className="title-font font-medium text-gray-600 ">
+              <span className="title-font font-medium text-gray-600">
                 Cước phí
               </span>
               <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                {post?.price}
+                {post.price}
               </span>
             </span>
           </a>
@@ -110,11 +114,11 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
             />
             <span className="flex-grow flex flex-col pl-4">
-              <span className="title-font font-medium text-gray-600 ">
+              <span className="title-font font-medium text-gray-600">
                 Thời hạn sử dụng
               </span>
               <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                {post?.time}
+                {post.time}
               </span>
             </span>
           </a>
@@ -127,11 +131,11 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
             />
             <span className="flex-grow flex flex-col pl-4">
-              <span className="title-font font-medium text-gray-600 ">
+              <span className="title-font font-medium text-gray-600">
                 Dung lượng tốc độ cao
               </span>
               <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                {post?.traffic}/ngày
+                {post.traffic}/ngày
               </span>
             </span>
           </a>
@@ -144,17 +148,17 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
             />
             <button
-              onClick={() => {
-                const message = encodeURIComponent(post.title);
-                window.location.href = `sms:+84987654321?body=${message}`;
-              }}
+              // onClick={() => {
+              //   const message = encodeURIComponent(post.title);
+              //   window.location.href = `sms:+84987654321?body=${message}`;
+              // }}
               className="flex-grow flex flex-col pl-4"
             >
-              <span className="title-font font-medium text-gray-600 ">
+              <span className="title-font font-medium text-gray-600">
                 Cú pháp đăng ký SMS
               </span>
               <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                {post?.title}{" "}
+                {post.title}{" "}
                 <span className="text-base text-[#CE2127]">gửi 290</span>
               </span>
             </button>
@@ -171,7 +175,22 @@ const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <PortableText value={post.body} components={PortableTextComponents} />
       </div>
     </div>
-  );
-};
+    <div className="block md:hidden">
+  <div className="fixed bottom-0 left-0 w-full bg-white px-3 py-5">
+   <span className="text-xl font-semibold">150.00đ <span className="text-normal font-normal">/tháng</span></span>
+   {/* <button
+                                 className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
+                                 onClick={() => {
+                                   const phoneNumber = "290";
+                                   const message = encodeURIComponent(`${post.title} `);
+                                   window.location.href = `sms:${phoneNumber}?body=${message}`;
+                                 }}
+                               >
+                                 Đăng ký
+                               </button> */}
+  </div>
+</div>
 
-export default PostPage;
+   </div>
+  );
+}

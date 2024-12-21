@@ -90,7 +90,7 @@ export default function DATA_MONTH() {
 ];
 
   return (
-    <div className="max-content px-5 md:px-0 mb-20  z-1">
+    <div className="max-content px-3 md:px-0 mb-20  z-1">
       <div className="flex justify-between items-center">
         <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
           <span className=" text-[#141718]">Gói Cước</span>
@@ -215,13 +215,14 @@ export default function DATA_MONTH() {
      
              {/* Swiper for displaying posts */}
              <Swiper
-               spaceBetween={20}
-               slidesPerView={2}
-               autoplay={{ delay: 2500 }}
+               spaceBetween={8}
+               slidesPerView={2.2}
+               autoplay={{ delay: 100 }}
                className="mySwiper"
              >
                {filteredPosts.map((post: Post) => (
                  <SwiperSlide key={post._id} className="flex justify-center items-center">
+                  <a href={`/package/${post?.slug.current}`}>
                    <div className="w-full">
                      <div className="items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                        {/* Post Title */}
@@ -281,6 +282,7 @@ export default function DATA_MONTH() {
                        </div>
                      </div>
                    </div>
+                   </a>
                  </SwiperSlide>
                ))}
              </Swiper>

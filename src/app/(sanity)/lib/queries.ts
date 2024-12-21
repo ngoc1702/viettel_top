@@ -1,6 +1,6 @@
 import {defineQuery} from 'next-sanity'
 
-export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12]{
+export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...1000]{
   _id, title, slug, 
   "authorName": author->name,
     mainImage {
@@ -39,7 +39,7 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     body
 }`)
 
-export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.current)][0...12]{
+export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.current)][0...1000]{
   _id, title, slug, traffic, price, time,
     mainImage {
       asset-> {

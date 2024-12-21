@@ -62,7 +62,7 @@ export default function Home() {
       <DATA_DAY/>
       <DATA_MORE/>
       <section className="text-gray-600 body-font max-content ">
-        <div className="container px-5 py-16 md:py-20 mx-auto">
+        <div className="container px-3 py-16 md:py-20 mx-auto">
           <div className="flex justify-between">
             <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">
               <span className=" text-[#141718]">Tin tức</span>
