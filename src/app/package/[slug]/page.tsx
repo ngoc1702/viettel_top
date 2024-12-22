@@ -11,6 +11,7 @@ import Price from "@public/assets/img/cuoc.svg";
 import Clock from "@public/assets/img/clock.svg";
 import Traffic from "@public/assets/img/data.svg";
 import SMS from "@public/assets/img/sms (1).svg";
+import SmsButton from "@/app/component/button";
 
 // Define the Post interface
 interface Post {
@@ -29,6 +30,7 @@ interface Post {
   slug: {
     current: string;
   };
+  globalField:string;
 }
 
 // Define the ImageValue type
@@ -87,7 +89,7 @@ export default async function Page({
       <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
         GÓI CƯỚC <span className="text-[#CE2127]"> {post.title}</span>
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-4">
         {/* Displaying info blocks */}
         <div className="h-full bg-white p-4 md:p-6 rounded-xl">
           <a className="inline-flex items-center">
@@ -176,18 +178,9 @@ export default async function Page({
       </div>
     </div>
     <div className="block md:hidden">
-  <div className="fixed bottom-0 left-0 w-full bg-white px-3 py-5">
-   <span className="text-xl font-semibold">150.00đ <span className="text-normal font-normal">/tháng</span></span>
-   {/* <button
-                                 className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
-                                 onClick={() => {
-                                   const phoneNumber = "290";
-                                   const message = encodeURIComponent(`${post.title} `);
-                                   window.location.href = `sms:${phoneNumber}?body=${message}`;
-                                 }}
-                               >
-                                 Đăng ký
-                               </button> */}
+  <div className="fixed bottom-0 left-0 w-full bg-white px-4 pt-4 pb-5 flex justify-between items-center shadow-top">
+   <span className="text-xl font-semibold">{post.price}<span className="text-sm font-normal">/{post.time}</span></span>
+   <SmsButton postTitle={post.title} globalField={post.globalField}/>
   </div>
 </div>
 
