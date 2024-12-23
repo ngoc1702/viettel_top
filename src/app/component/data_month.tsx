@@ -41,6 +41,7 @@ interface Post {
 export default function DATA_MONTH() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  
 
   const handleOpenPopup = (post: Post) => {
     setSelectedPost(post);
@@ -78,7 +79,9 @@ export default function DATA_MONTH() {
     };
 
     fetchPosts();
-  }, []); // Chỉ chạy một lần khi component mount
+  }, []); 
+console.log(posts,"QQQQQQQ");
+
 
   const subCategoryTitles = [
     ...new Set(
@@ -133,7 +136,7 @@ export default function DATA_MONTH() {
                   <div className="mt-6" key={title}>
                     {/* Tên sub_category.title */}
                     <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
-                      Gói cước {title}
+                      Gói cước {title} 
                     </h3>
 
                     <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1">
@@ -142,7 +145,7 @@ export default function DATA_MONTH() {
                           <div className="p-4 w-full">
                             <div className="items-center h-full p-6 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                               <span className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
-                                {post.title}
+                                {post.title}  
                               </span>
 
                               <h1 className="mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">

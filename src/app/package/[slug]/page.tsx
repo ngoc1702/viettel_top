@@ -1,5 +1,5 @@
 import { client } from "../../../sanity/lib/client";
-import { groq } from "next-sanity";
+// import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import {
   PortableTextComponentProps,
@@ -30,7 +30,7 @@ interface Post {
   slug: {
     current: string;
   };
-  globalField:string;
+  globalField: string
 }
 
 // Define the ImageValue type
@@ -43,13 +43,48 @@ type ImageValue = {
 
 // Server-side data fetching function
 const fetchPost = async (slug: string): Promise<Post> => {
-  const query = groq`*[_type == "package" && slug.current == $slug][0]`;
+  const query = `
+    *[_type == "package" && slug.current == $slug][0]{
+      _id, 
+      title, 
+      slug, 
+      traffic, 
+      price, 
+      time,
+      mainImage {
+        asset-> {
+          url
+        },
+        alt
+      },
+      categories[]-> {
+        title
+      },
+      sub_categories[]-> {
+        title
+      },
+      gallery[] {
+        asset-> {
+          _id,
+          url
+        },
+        caption
+      },
+      _createdAt,
+      body,
+      "globalField": *[_type == "global"][0].globalField
+    }
+  `;
+  
   const post = await client.fetch(query, { slug });
   if (!post) {
     throw new Error("Post not found");
   }
+  console.log('Post Data:', post);
   return post;
 };
+
+
 
 // Define PortableTextComponents for rendering PortableText
 const PortableTextComponents = {
@@ -160,8 +195,8 @@ export default async function Page({
                 Cú pháp đăng ký SMS
               </span>
               <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                {post.title}{" "}
-                <span className="text-base text-[#CE2127]">gửi 290</span>
+                {post.title} {post.globalField}
+                <span className="text-base text-[#CE2127]"> gửi 290</span>
               </span>
             </button>
           </a>
@@ -180,7 +215,8 @@ export default async function Page({
     <div className="block md:hidden">
   <div className="fixed bottom-0 left-0 w-full bg-white px-4 pt-4 pb-5 flex justify-between items-center shadow-top">
    <span className="text-xl font-semibold">{post.price}<span className="text-sm font-normal">/{post.time}</span></span>
-   <SmsButton postTitle={post.title} globalField={post.globalField}/>
+   
+      <SmsButton postTitle={post.title} globalField={post.globalField} />
   </div>
 </div>
 

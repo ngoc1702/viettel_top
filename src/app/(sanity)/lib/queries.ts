@@ -39,15 +39,21 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
     body
 }`)
 
-export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.current)][0...1000]{
-  _id, title, slug, traffic, price, time,
+export const POSTS_QUERY2 = defineQuery(`
+  *[_type == "package" && defined(slug.current)][0...1000]{
+    _id, 
+    title, 
+    slug, 
+    traffic, 
+    price, 
+    time,
     mainImage {
       asset-> {
         url
       },
       alt
     },
-   categories[]-> {
+    categories[]-> {
       title
     },
     sub_categories[]-> {
@@ -63,7 +69,8 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.c
     _createdAt,
     body,
     "globalField": *[_type == "global"][0].globalField
-}`)
+
+  }`);
 
 // export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && !defined(subCategory) && defined(slug.current)][0...12]{
 //   _id, 
@@ -106,5 +113,6 @@ export const POST_QUERY2 = defineQuery(`*[_type == "package" && slug.current == 
       title
     },
     publishedAt,
-    "globalField": *[_type == "global"][0].globalField
+   "globalField": *[_type == "global"][0].globalField
+
 }`)
