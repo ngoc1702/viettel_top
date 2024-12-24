@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+// import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import logo from "@public/assets/img/viettel.svg";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export default function Footer() {
             />
           </a>
           <p className="mt-4 text-base text-gray-500">
-            Hãy nói theo cách của bạn.
+            Theo cách của bạn.
           </p>
         </div>
         <div className="lg:w-2/3 md:w-2/3 w-full flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
@@ -68,7 +68,7 @@ export default function Footer() {
                   18008098 / 198
                 </a>
               </div>
-              <div className="flex gap-5 items-center mt-4  whitespace-nowrap justify-center">
+              {/* <div className="flex gap-5 items-center mt-4  whitespace-nowrap justify-center">
                 <FontAwesomeIcon icon={faEnvelope} width={18} />
                 <a
                   href="mailto:info@adsdigi.com"
@@ -76,7 +76,7 @@ export default function Footer() {
                 >
                   info@adsdigi.com
                 </a>
-              </div>
+              </div> */}
             </address>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Footer() {
       <div className="bg-[#CE2127]">
         <div className="max-content container mx-auto py-4 px-5 flex justify-between flex-wrap sm:flex-row items-center">
           <p className="text-white text-sm text-center sm:text-left">
-          © 2024 viettelup.vn. All rights reserved
+          © 2024 viettel.media. All rights reserved
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             <a
