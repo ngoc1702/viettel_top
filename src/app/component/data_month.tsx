@@ -78,7 +78,8 @@ export default function DATA_MONTH() {
     };
 
     fetchPosts();
-  }, []); // Chỉ chạy một lần khi component mount
+  }, []);
+  console.log(posts, "QQQQQQQ");
 
   const subCategoryTitles = [
     ...new Set(
@@ -136,14 +137,14 @@ export default function DATA_MONTH() {
                       Gói cước {title}
                     </h3>
 
-                    <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1">
+                    <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1 mb-4">
                       {filteredPosts.map((post: Post) => (
                         <div key={post._id}>
-                          <div className="p-4 w-full">
-                            <div className="items-center h-full p-6 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
-                              <span className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
+                          <div className="p-4 w-full  ">
+                            <div className="min-h-[370px] justify-between items-center  p-6 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
+                              <div className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
                                 {post.title}
-                              </span>
+                              </div>
 
                               <h1 className="mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                                 <span className="text-[#CE2127]">
@@ -154,26 +155,32 @@ export default function DATA_MONTH() {
                                 </span>
                               </h1>
 
-                              <h2 className="text-base tracking-widest title-font mb-1 font-medium">
-                                MIỄN PHÍ
-                              </h2>
+                              {post?.gallery?.length > 0 && (
+                                <>
+                                  <h2 className="text-base tracking-widest title-font mb-1 font-medium">
+                                    MIỄN PHÍ
+                                  </h2>
 
-                              <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                {post?.gallery?.map((image: Image) => (
-                                  <div key={image.asset._id}>
-                                    <Image
-                                      src={image.asset.url}
-                                      alt={image.caption || "Gallery Image"}
-                                      width={30}
-                                      height={30}
-                                      style={{ objectFit: "cover" }}
-                                    />
-                                    {image.caption && <p>{image.caption}</p>}
-                                  </div>
-                                ))}
-                              </span>
+                                  <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                                    {post.gallery.map((image: Image) => (
+                                      <div key={image.asset._id}>
+                                        <Image
+                                          src={image.asset.url}
+                                          alt={image.caption || "Gallery Image"}
+                                          width={30}
+                                          height={30}
+                                          style={{ objectFit: "cover" }}
+                                        />
+                                        {image.caption && (
+                                          <p>{image.caption}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </span>
+                                </>
+                              )}
 
-                              <h2 className="mt-4 font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
+                              <h2 className="mt-4 font-bold text-gray-900 leading-none flex items-end pb-4 mb-4">
                                 <span className="text-3xl text-gray-900">
                                   {post?.price}
                                 </span>
@@ -238,16 +245,16 @@ export default function DATA_MONTH() {
                   spaceBetween={8}
                   slidesPerView={2.2}
                   autoplay={{ delay: 100 }}
-                  freeMode= {true}
-                  className="mySwiper"
+                  freeMode={true}
+                  className="mySwiper "
                 >
                   {filteredPosts.map((post: Post) => (
                     <SwiperSlide
                       key={post._id}
                       className="flex justify-center items-center"
                     >
-                      <div className="w-full">
-                        <div className="items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
+                      <div className="w-full ">
+                        <div className="min-h-[265px] justify-between items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                           {/* Post Title */}
                           <a href={`/package/${post?.slug.current}`}>
                             <span className="bg-[#CE2127] text-white px-3 py-1 text-sm font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
@@ -263,30 +270,30 @@ export default function DATA_MONTH() {
                               /NGÀY
                             </span>
                           </h1>
-                          <h2 className="text-sm tracking-widest title-font font-medium">
-                            MIỄN PHÍ
-                          </h2>
+                          {post?.gallery?.length > 0 && (
+                                <>
+                                  <h2 className="text-base tracking-widest title-font mb-1 font-medium">
+                                    MIỄN PHÍ
+                                  </h2>
 
-                          {/* Image Gallery */}
-                          <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                            {post?.gallery?.map((image: Image) => (
-                              <div
-                                key={image.asset._id}
-                                className="gallery-item"
-                              >
-                                <Image
-                                  className="gallery-image"
-                                  src={image.asset.url}
-                                  alt={image.caption || "Gallery Image"}
-                                  width={30}
-                                  height={30}
-                                  style={{ objectFit: "cover" }}
-                                />
-                                {image.caption && <p>{image.caption}</p>}
-                              </div>
-                            ))}
-                          </span>
-
+                                  <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                                    {post.gallery.map((image: Image) => (
+                                      <div key={image.asset._id}>
+                                        <Image
+                                          src={image.asset.url}
+                                          alt={image.caption || "Gallery Image"}
+                                          width={30}
+                                          height={30}
+                                          style={{ objectFit: "cover" }}
+                                        />
+                                        {image.caption && (
+                                          <p>{image.caption}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </span>
+                                </>
+                              )}
                           {/* Price and Time */}
                           <h2 className="mt-2 font-bold text-gray-900 leading-none flex items-end pb-1 mb-2 border-b border-gray-200">
                             <span className="text-lg text-gray-900">

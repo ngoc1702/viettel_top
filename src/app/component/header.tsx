@@ -32,17 +32,10 @@ export default function Header() {
           </Link>
         </nav>
 
-        <button
-          onClick={() => {
-            // Scroll to the footer element
-            const footerElement = document.getElementById("footer");
-            if (footerElement) {
-              footerElement.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
+        <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD"><button
           className="hidden md:inline-flex items-center bg-[#CE2127] text-white border-0 py-3 px-6 focus:outline-none hover:bg-[#AA0000] rounded text-base mt-4 md:mt-0"
         >
-          Nhận Tư Vấn
+          Đăng nhập
           <svg
             fill="none"
             stroke="currentColor"
@@ -54,7 +47,7 @@ export default function Header() {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </button>
+        </button></a>
         {/* Header mobile */}
         <div className="block md:hidden">
       <div>

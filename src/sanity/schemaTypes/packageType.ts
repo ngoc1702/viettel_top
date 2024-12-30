@@ -1,5 +1,5 @@
-import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { DocumentTextIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const packageType = defineType({
   name: 'package',
@@ -30,18 +30,16 @@ export const packageType = defineType({
       name: 'time',
       type: 'string',
     }),
-
     defineField({
-      name: "gallery", // Tên trường
-      title: "Gallery", // Tiêu đề hiển thị
-      type: "array", // Kiểu dữ liệu là mảng
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'array',
       of: [
         {
-          type: "image", 
+          type: 'image',
           options: {
-            hotspot: true, 
+            hotspot: true,
           },
-         
         },
       ],
     }),
@@ -56,21 +54,19 @@ export const packageType = defineType({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
-        }
-      ]
+        },
+      ],
     }),
     defineField({
       name: 'categories',
-       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],
     }),
-
     defineField({
       name: 'sub_categories',
-       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'sub_category'}})],
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: { type: 'sub_category' } })],
     }),
-
     defineField({
       name: 'body',
       type: 'blockContent',
@@ -78,18 +74,18 @@ export const packageType = defineType({
     defineField({
       name: 'globalField',
       type: 'reference',
-      to: {type: 'global'},
+      to: { type: 'global' }, 
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
       media: 'mainImage',
+      globalTitle: 'globalField.title',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      return { ...selection };
+      
     },
   },
-})
+});

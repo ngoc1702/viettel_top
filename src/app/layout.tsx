@@ -7,7 +7,6 @@ import Loading from "./component/loading";
 import Header from "./component/header";
 import Footer from "./component/footer";
 
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -58,7 +57,7 @@ export default function RootLayout({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); 
+      setLoading(false);
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -67,7 +66,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link rel="icon" href="/assets/img/favicon.svg" sizes="32x16" />
+        <title>{}</title>
+        <link rel="icon" href="/assets/img/favicon.svg" sizes="32x16" />
         <meta
           name="description"
           content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)"
@@ -75,8 +75,8 @@ export default function RootLayout({
         <meta name="keywords" content="Next.js, SEO, React, thẻ meta" />
         <meta name="author" content="Tên của bạn hoặc công ty" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       
       </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
