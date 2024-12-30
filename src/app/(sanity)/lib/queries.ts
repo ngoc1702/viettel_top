@@ -62,6 +62,9 @@ export const POSTS_QUERY2 = defineQuery(`*[_type == "package"  && defined(slug.c
     },
     _createdAt,
     body,
+    globalField[]-> {
+      title
+    },
     "globalField": *[_type == "global"][0].globalField
 }`)
 

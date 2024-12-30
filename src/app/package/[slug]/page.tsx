@@ -19,6 +19,7 @@ interface Post {
   traffic: string;
   price: string;
   time: string;
+  globalField: string;
   mainImage: {
     asset: {
       url: string;
@@ -30,7 +31,6 @@ interface Post {
   slug: {
     current: string;
   };
-  globalField:string;
 }
 
 // Define the ImageValue type
@@ -83,11 +83,13 @@ export default async function Page({
   const { slug } = await params; // Resolving the promise to get the slug
   const post = await fetchPost(slug); // Fetch the post based on slug
 
+
+
   return (
     <div className="relative">
     <div className="max-content px-5 md:px-0 py-12 m:py-20 mt-20 relative">
       <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
-        GÓI CƯỚC <span className="text-[#CE2127]"> {post.title}</span>
+        GÓI CƯỚC <span className="text-[#CE2127]"> {post.title} </span>  
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-4">
         {/* Displaying info blocks */}
@@ -180,7 +182,7 @@ export default async function Page({
     <div className="block md:hidden">
   <div className="fixed bottom-0 left-0 w-full bg-white px-4 pt-4 pb-5 flex justify-between items-center shadow-top">
    <span className="text-xl font-semibold">{post.price}<span className="text-sm font-normal">/{post.time}</span></span>
-   <SmsButton postTitle={post.title} globalField={post.globalField}/>
+   <SmsButton postTitle={post.title} globalField={String(post.globalField)} />
   </div>
 </div>
 
