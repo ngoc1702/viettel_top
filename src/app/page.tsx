@@ -55,8 +55,8 @@ export default function Home() {
       <Banner />
       <section className="mt-6 mb-6 px-3 md:px-0 mx-auto text-center">
         <p className="uppercase font-bold text-[20px] leading-[50px] max-md:max-w-full max-md:text-lg max-md:leading-[50px]">GÓI CƯỚC DATA 4G 5G VIETTEL</p>
-       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Đăng ký gói cước data 4G 5G tốc độ cao dễ dàng cùng Viettelup.vn!</p>
-       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Viettel Up là website phù hợp với giới trẻ, cung cấp thông tin đầy đủ và chính xác mọi dịch vụ, khuyến mại của Viettel.</p>
+       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Đăng ký gói cước data 4G 5G tốc độ cao dễ dàng cùng Viettel.media!</p>
+       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Viettel Media là website phù hợp với giới trẻ, cung cấp thông tin đầy đủ và chính xác mọi dịch vụ, khuyến mại của Viettel.</p>
       </section>
       <DATA_MONTH/>
       <DATA_DAY/>

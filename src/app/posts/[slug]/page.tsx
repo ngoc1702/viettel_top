@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponentProps, PortableTextBlock } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
+import Head from "next/head";
 
 interface Post {
   title: string;
@@ -70,23 +71,28 @@ const PostPage = async ({ params }: PageProps) => {
     return <div>Post not found</div>;
   }
 
-  return (
-    <div className="max-content px-5 md:px-0 py-12 md:py-20 mt-20">
-      <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
-        {post.title}
-      </h1>
-      <span className="mt-1 text-gray-500 text-base">
-        {new Date(post._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
-      </span>
-      <img
-        className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
-        src={urlFor(post.mainImage).url() || ''}
-        alt={post.mainImage?.alt || 'Post image'}
-      />
-      <div className="mt-6">
-        <PortableText value={post.body} components={PortableTextComponents} />
+  return ( 
+    <>
+      <Head>
+        <title>{post.title}</title> {/* Use post.title directly */}
+      </Head>
+      <div className="max-content px-5 md:px-0 py-12 md:py-20 mt-20">
+        <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
+          {post.title} 
+        </h1>
+        <span className="mt-1 text-gray-500 text-base">
+          {new Date(post._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
+        </span>
+        <img
+          className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
+          src={urlFor(post.mainImage).url() || ''}
+          alt={post.mainImage?.alt || 'Post image'}
+        />
+        <div className="mt-6">
+          <PortableText value={post.body} components={PortableTextComponents} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
