@@ -20,47 +20,54 @@ interface Post {
   };
   title: string;
   categories: Category[];
-  _createdAt:string;
+  _createdAt: string;
   mainImage: {
     asset: {
-        url: string;
+      url: string;
     };
-};
-  authorName:string;
- 
+  };
+  authorName: string;
 }
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | null>(null);
-  
-    useEffect(() => {
-      const fetchPosts = async () => {
-        try {
-          const posts: Post[] = await client.fetch(POSTS_QUERY);
-  
-          if (!posts) {
-            throw new Error("Failed to fetch posts");
-          }
-          setPosts(posts);
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        } finally {
-          console.log("Fetch posts process complete");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts: Post[] = await client.fetch(POSTS_QUERY);
+
+        if (!posts) {
+          throw new Error("Failed to fetch posts");
         }
-      };
-  
-      fetchPosts();
-    }, []);
+        setPosts(posts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        console.log("Fetch posts process complete");
+      }
+    };
+
+    fetchPosts();
+  }, []);
   return (
-    <div >
+    <div>
+      <title>Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng</title>
       <Banner />
       <section className="mt-6 mb-6 px-3 md:px-0 mx-auto text-center">
-        <p className="uppercase font-bold text-[20px] leading-[50px] max-md:max-w-full max-md:text-lg max-md:leading-[50px]">GÓI CƯỚC DATA 4G 5G VIETTEL</p>
-       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Đăng ký gói cước data 4G 5G tốc độ cao dễ dàng cùng Viettel.media!</p>
-       <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">Viettel Media là website phù hợp với giới trẻ, cung cấp thông tin đầy đủ và chính xác mọi dịch vụ, khuyến mại của Viettel.</p>
+        <p className="uppercase font-bold text-[20px] leading-[50px] max-md:max-w-full max-md:text-lg max-md:leading-[50px]">
+          GÓI CƯỚC DATA 4G 5G VIETTEL
+        </p>
+        <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">
+          Đăng ký gói cước data 4G 5G tốc độ cao dễ dàng cùng Viettel.media!
+        </p>
+        <p className=" text-[16px] leading-[32px] max-md:max-w-full max-md:text-[14px] max-md:leading-[24px]">
+          Viettel Media là website phù hợp với giới trẻ, cung cấp thông tin đầy
+          đủ và chính xác mọi dịch vụ, khuyến mại của Viettel.
+        </p>
       </section>
-      <DATA_MONTH/>
-      <DATA_DAY/>
-      <DATA_MORE/>
+      <DATA_MONTH />
+      <DATA_DAY />
+      <DATA_MORE />
       <section className="text-gray-600 body-font max-content ">
         <div className="container px-3 py-16 md:py-20 mx-auto">
           <div className="flex justify-between">
@@ -74,64 +81,68 @@ export default function Home() {
             </a>
           </div>
           <div className="md:grid md:grid-cols-3 hidden -m-4 mt-2">
-          {posts &&
-        posts
-          .sort((a, b) => new Date(b._createdAt).getTime() - new Date(a._createdAt).getTime())
-          .slice(0, 3)
-          .map((post: Post) => (
-                <div key={post._id}>
-                  <div className="p-4 ">
-                    <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
-                      <img
-                        className="lg:h-60 md:h-36 w-full object-cover object-center"
-                        src={post.mainImage?.asset?.url}
-                        alt="blog"
-                      />
-                      <div className="p-6">
-                        <div className="flex justify-between">
-                          <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {post.categories
-                              ?.map((cat: Category) => cat.title)
-                              .join(", ") || "No categories"}
-                          </h2>
-                          <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {new Date(post?._createdAt)
-                              .toLocaleDateString("en-GB")
-                              .replace(/\//g, "-")}
-                          </p>
-                        </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
-                          <a
-                            className="hover:text-[#CE2127]"
-                            href={`/posts/${post?.slug.current}`}
-                          >
-                            {post?.title}
-                          </a>
-                        </h1>
-
-                        <p className="mt-1  italic leading-relaxed mb-3">
-                          {post.authorName || "No author"}
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <a
-                            href={`/posts/${post?.slug.current}`}
-                            className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
-                          >
-                            <span>Xem thêm </span>
-                            <svg
-                              className="w-4 h-4 ml-2"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+            {posts &&
+              posts
+                .sort(
+                  (a, b) =>
+                    new Date(b._createdAt).getTime() -
+                    new Date(a._createdAt).getTime()
+                )
+                .slice(0, 3)
+                .map((post: Post) => (
+                  <div key={post._id}>
+                    <div className="p-4 ">
+                      <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
+                        <img
+                          className="lg:h-60 md:h-36 w-full object-cover object-center"
+                          src={post.mainImage?.asset?.url}
+                          alt="blog"
+                        />
+                        <div className="p-6">
+                          <div className="flex justify-between">
+                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                              {post.categories
+                                ?.map((cat: Category) => cat.title)
+                                .join(", ") || "No categories"}
+                            </h2>
+                            <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                              {new Date(post?._createdAt)
+                                .toLocaleDateString("en-GB")
+                                .replace(/\//g, "-")}
+                            </p>
+                          </div>
+                          <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
+                            <a
+                              className="hover:text-[#CE2127]"
+                              href={`/posts/${post?.slug.current}`}
                             >
-                              <path d="M5 12h14" />
-                              <path d="M12 5l7 7-7 7" />
-                            </svg>
-                          </a>
-                          {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                              {post?.title}
+                            </a>
+                          </h1>
+
+                          <p className="mt-1  italic leading-relaxed mb-3">
+                            {post.authorName || "No author"}
+                          </p>
+                          <div className="flex items-center flex-wrap ">
+                            <a
+                              href={`/posts/${post?.slug.current}`}
+                              className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
+                            >
+                              <span>Xem thêm </span>
+                              <svg
+                                className="w-4 h-4 ml-2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                              </svg>
+                            </a>
+                            {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                             <svg
                               className="w-4 h-4 mr-1"
                               stroke="currentColor"
@@ -160,12 +171,12 @@ export default function Home() {
                             </svg>
                             6
                           </span> */}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
           </div>
 
           {/* Swiper chỉ xuất hiện trên mobile (max-width: 768px) */}
@@ -178,63 +189,67 @@ export default function Home() {
               className="mySwiper"
             >
               {posts &&
-        posts
-          .sort((a, b) => new Date(b._createdAt).getTime() - new Date(a._createdAt).getTime())
-          .slice(0, 3)
-          .map((post: Post) => (
-                <div key={post._id}>
-                  <SwiperSlide className="flex justify-center items-center ">
-                    <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
-                      <img
-                        className="lg:h-60 md:h-36 w-full object-cover object-center"
-                        src={post.mainImage?.asset?.url}
-                        alt="blog"
-                      />
-                      <div className="p-6">
-                        <div className="flex justify-between">
-                          <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {post.categories
-                              ?.map((cat: Category) => cat.title)
-                              .join(", ") || "No categories"}
-                          </h2>
-                          <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                            {new Date(post?._createdAt)
-                              .toLocaleDateString("en-GB")
-                              .replace(/\//g, "-")}
-                          </p>
-                        </div>
-                        <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
-                          <a
-                            className="hover:text-[#CE2127]"
-                            href={`/posts/${post?.slug.current}`}
-                          >
-                            {post?.title}
-                          </a>
-                        </h1>
+                posts
+                  .sort(
+                    (a, b) =>
+                      new Date(b._createdAt).getTime() -
+                      new Date(a._createdAt).getTime()
+                  )
+                  .slice(0, 3)
+                  .map((post: Post) => (
+                    <div key={post._id}>
+                      <SwiperSlide className="flex justify-center items-center ">
+                        <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
+                          <img
+                            className="lg:h-60 md:h-36 w-full object-cover object-center"
+                            src={post.mainImage?.asset?.url}
+                            alt="blog"
+                          />
+                          <div className="p-6">
+                            <div className="flex justify-between">
+                              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                {post.categories
+                                  ?.map((cat: Category) => cat.title)
+                                  .join(", ") || "No categories"}
+                              </h2>
+                              <p className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                {new Date(post?._createdAt)
+                                  .toLocaleDateString("en-GB")
+                                  .replace(/\//g, "-")}
+                              </p>
+                            </div>
+                            <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
+                              <a
+                                className="hover:text-[#CE2127]"
+                                href={`/posts/${post?.slug.current}`}
+                              >
+                                {post?.title}
+                              </a>
+                            </h1>
 
-                        <p className="mt-1 italic leading-relaxed mb-3">
-                          {post.authorName || "No author"}
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <a
-                            href={`/posts/${post?.slug.current}`}
-                            className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
-                          >
-                            <span>Xem thêm </span>
-                            <svg
-                              className="w-4 h-4 ml-2"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M5 12h14" />
-                              <path d="M12 5l7 7-7 7" />
-                            </svg>
-                          </a>
-                          {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                            <p className="mt-1 italic leading-relaxed mb-3">
+                              {post.authorName || "No author"}
+                            </p>
+                            <div className="flex items-center flex-wrap ">
+                              <a
+                                href={`/posts/${post?.slug.current}`}
+                                className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
+                              >
+                                <span>Xem thêm </span>
+                                <svg
+                                  className="w-4 h-4 ml-2"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth={2}
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path d="M5 12h14" />
+                                  <path d="M12 5l7 7-7 7" />
+                                </svg>
+                              </a>
+                              {/* <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                             <svg
                               className="w-4 h-4 mr-1"
                               stroke="currentColor"
@@ -263,12 +278,12 @@ export default function Home() {
                             </svg>
                             6
                           </span> */}
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      </SwiperSlide>
                     </div>
-                  </SwiperSlide>
-                </div>
-              ))}
+                  ))}
             </Swiper>
           </div>
         </div>

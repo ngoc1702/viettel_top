@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponentProps, PortableTextBlock } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import Head from "next/head";
+
 
 interface Post {
   title: string;
@@ -70,12 +70,13 @@ const PostPage = async ({ params }: PageProps) => {
   if (!post) {
     return <div>Post not found</div>;
   }
+console.log(post.title,"FFFFFF");
 
   return ( 
     <>
-      <Head>
-        <title>{post.title}</title> {/* Use post.title directly */}
-      </Head>
+   
+        <title>{post.title}</title>
+     
       <div className="max-content px-5 md:px-0 py-12 md:py-20 mt-20">
         <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
           {post.title} 

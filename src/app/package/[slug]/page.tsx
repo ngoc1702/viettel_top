@@ -1,4 +1,8 @@
 "use client";
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { client } from "../../../sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import {
@@ -12,9 +16,6 @@ import Clock from "@public/assets/img/clock.svg";
 import Traffic from "@public/assets/img/data.svg";
 import SMS from "@public/assets/img/sms (1).svg";
 import SmsButton from "@/app/component/button";
-import Head from "next/head";
-import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 const POSTS_QUERY2 = `*[_type == "package"]{
   _id,
@@ -42,6 +43,7 @@ const POSTS_QUERY2 = `*[_type == "package"]{
       },
       caption
     },
+    "globalField": *[_type == "global"][0].globalField
 }`;
 
 interface Category {
@@ -151,82 +153,57 @@ const PortableTextComponents = {
   },
 };
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({
+  params,
+}: {
+  params: Promise<{ id: string; slug: string }>;
+}) {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const handleOpenPopup = (post: Post) => {
-    setSelectedPost(post);
-    setIsPopupVisible(true);
-  };
-  const handleClosePopup = () => {
-    setIsPopupVisible(false);
-    setSelectedPost(null);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { slug } = params;
+        // Await params to resolve and get 'id' and 'slug'
+        const resolvedParams = await params;
+        const { slug } = resolvedParams;
 
         // Fetch specific post
         const post = await fetchPost(slug);
-        console.log("selectedPost:", post);
         setSelectedPost(post);
 
         if (!post || !post.categories || !post.sub_categories) {
-          console.warn(
-            "selectedPost hoặc categories hoặc sub_categories không hợp lệ"
-          );
           setPosts([]);
           return;
         }
 
         // Fetch all posts
         const fetchedPosts = await client.fetch<Post[]>(POSTS_QUERY2);
-        console.log("Tất cả bài viết từ API:", fetchedPosts);
 
-        if (!fetchedPosts) {
-          throw new Error("Failed to fetch posts");
-        }
-
-        // Filter posts that share any categories.title and sub_categories.title with selectedPost
-        // Exclude the selected post from the filtered list
+        // Filter posts based on categories and sub-categories
         const filteredPosts = fetchedPosts.filter(
           (fetchedPost) =>
-            // Kiểm tra categories.title
             fetchedPost.categories?.some((fetchedCategory) =>
               post.categories.some(
                 (selectedCategory) =>
                   selectedCategory.title === fetchedCategory.title
               )
             ) &&
-            // Kiểm tra sub_categories.title
             fetchedPost.sub_categories?.some((fetchedSubCategory) =>
               post.sub_categories.some(
                 (selectedSubCategory) =>
                   selectedSubCategory.title === fetchedSubCategory.title
               )
             ) &&
-            // Loại trừ bài viết đã chọn
             fetchedPost.slug.current !== post.slug.current
         );
 
-        console.log(
-          "Danh sách các bài đăng cùng categories và sub_categories (không bao gồm bài đã chọn):",
-          filteredPosts
-        );
-
         setPosts(filteredPosts);
-      } catch (err: unknown) {
-        // Cast `err` to `any` or `Error` to access its properties
-        if (err instanceof Error) {
-          console.error("Lỗi khi fetch data:", err.message);
-        } else {
-          console.error("Lỗi khi fetch data:", err);
-        }
+      } catch (err) {
+        console.error("Lỗi khi fetch data:", err);
       } finally {
         setLoading(false);
       }
@@ -242,13 +219,23 @@ export default function Page({ params }: { params: { slug: string } }) {
   if (!selectedPost) {
     return <div>Post not found</div>;
   }
+  
+  
+
+  const handleOpenPopup = (post: Post) => {
+    setSelectedPost(post);
+    setIsPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+    // setSelectedPost(null); // Uncomment if you want to reset selectedPost
+  };
 
   return (
-    <div className="max-content px-5">
+    <div className="max-content px-3">
       <div className="relative">
-        <Head>
-          <title>{`GÓI CƯỚC ${selectedPost.title}`}</title>
-        </Head>
+        <title>{`Gói cước ${selectedPost.title}`}</title>
 
         <div className="max-content md:px-0 py-12 m:py-20 mt-20 relative">
           <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
@@ -327,8 +314,8 @@ export default function Page({ params }: { params: { slug: string } }) {
               </a>
             </div>
           </div>
-          <div className="block md:hidden z-9">
-            <div className="fixed bottom-0 left-0 w-full bg-white px-4 pt-4 pb-5 flex justify-between items-center shadow-top">
+          <div className="block md:hidden ">
+            <div className="z-10 fixed bottom-0 left-0 w-full bg-white px-4 pt-4 pb-5 flex justify-between items-center shadow-top">
               <span className="text-xl font-semibold">
                 {selectedPost.price}
                 <span className="text-sm font-normal">
@@ -349,11 +336,33 @@ export default function Page({ params }: { params: { slug: string } }) {
           alt={selectedPost.mainImage?.alt}
         />
         {/* PortableText Rendering */}
-        <div className="mb-12 max-content mt-6">
+        <div className="mb-8 max-content mt-6">
           <PortableText
             value={selectedPost.body}
             components={PortableTextComponents}
           />
+        </div>
+
+        <div className="mb-10 max-content ">
+          <button
+            onClick={() => handleOpenPopup(selectedPost!)} // Sử dụng selectedPost để mở popup
+            className="hidden md:flex  gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-3 px-12 focus:outline-none hover:bg-[#AA0000] rounded-[5px] font-semibold"
+          >
+            Đăng ký
+          </button>
+
+          <button
+                            className="text-sm flex md:hidden gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-3 px-12 focus:outline-none hover:bg-[#AA0000] rounded-[5px] font-semibold"
+                            onClick={() => {
+                              const phoneNumber = "290";
+                              const message = encodeURIComponent(
+                                `${selectedPost.title} ${selectedPost.globalField}`
+                              );
+                              window.location.href = `sms:${phoneNumber}?body=${message}`;
+                            }}
+                          >
+                            Đăng ký
+                          </button>
         </div>
 
         {/* Display Similar Posts */}
@@ -438,12 +447,12 @@ export default function Page({ params }: { params: { slug: string } }) {
               ))}
           </div>
 
-          <div className="block md:hidden overflow-x-hidden z-0">
+          <div className="block md:hidden overflow-x-hidden mt-4 z-0">
             <Swiper
               spaceBetween={8}
               slidesPerView={2.2}
               autoplay={{ delay: 100 }}
-              freeMode={true}
+              freeMode={false}
               className="mySwiper"
             >
               {posts
@@ -457,11 +466,12 @@ export default function Page({ params }: { params: { slug: string } }) {
                 .slice(0, 4) // Only show 4 latest posts
                 .map((post) => (
                   <SwiperSlide
+                    style={{ width: "100%" }}
                     key={post.slug.current}
-                    className="flex justify-center items-center"
+                    className="flex justify-center items-center w-[100%]"
                   >
                     <div className="w-full">
-                      <div className="min-h-[265px] justify-between items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
+                      <div className=" min-w-[170px] min-h-[275px] justify-between items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                         {/* Post Title */}
                         <a href={`/package/${post?.slug.current}`}>
                           <span className="bg-[#CE2127] text-white px-3 py-1 text-sm font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
@@ -529,6 +539,48 @@ export default function Page({ params }: { params: { slug: string } }) {
                 ))}
             </Swiper>
           </div>
+
+          {isPopupVisible && selectedPost && (
+            <div className="fixed inset-0 z-50 px-5 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="absolute inset-0 "></div>
+              <div className="relative z-10 bg-white p-8 rounded shadow-lg max-w-md w-full">
+                <h2 className="text-xl font-bold mb-4 text-center">
+                  Thông báo
+                </h2>
+                <span className="mb-4">
+                  Để đăng ký gói cước, vui lòng soạn tin nhắn trên điện thoại
+                  theo cú pháp
+                  <span className="text-[#CE2127]">
+                    {" "}
+                    {selectedPost?.title} {selectedPost?.globalField}
+                  </span>{" "}
+                  gửi <span className="text-[#CE2127]">290</span>. Để xem các
+                  thuê bao áp dụng gói cước trên, vui lòng kiểm tra tại link
+                  dưới.
+                </span>
+                <div className="flex justify-center gap-6 mt-6 text-center items-center">
+                  <button
+                    onClick={handleClosePopup}
+                    className="min-w-[120px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded-[25px] font-semibold"
+                  >
+                    Đóng
+                  </button>
+                  <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=HNI1_TTHKM_VTP_00038_DB">
+                    <button className="min-w-[120px] flex justify-center items-center gap-1 text-white bg-[#CE2127] border-0 py-[8.5px] px-6 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
+                      Kiểm tra ngay
+                    </button>
+                  </a>
+                </div>
+
+                <button
+                  onClick={handleClosePopup}
+                  className="absolute top-2 right-2 text-gray-500 hover:text-black"
+                >
+                  <FontAwesomeIcon icon={faXmark} width={12} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -50,6 +50,7 @@ export default function Page() {
 
   return (
     <div className='max-content mt-16'>
+      <title>Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng</title>
       <section className="text-gray-600 body-font max-content ">
         <div className="container px-5 py-12 md:py-20 mx-auto">
           <h1 className="uppercase font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-4xl max-md:leading-[50px]">

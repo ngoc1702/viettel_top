@@ -66,8 +66,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>{}</title>
+        <title>Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng</title>
         <link rel="icon" href="/assets/img/favicon.svg" sizes="32x16" />
+        <meta name="application-name" content="Viettel" />
         <meta
           name="description"
           content="Mô tả ngắn về nội dung trang (dưới 160 ký tự)"
