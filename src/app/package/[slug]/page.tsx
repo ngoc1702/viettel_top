@@ -330,7 +330,7 @@ export default function Page({
           </div>
         </div>
 
-        <img
+        <Image
           className="lg:h-[70vh] md:h-36 w-full object-cover object-center "
           src={urlFor(selectedPost.mainImage).url()}
           alt={selectedPost.mainImage?.alt}

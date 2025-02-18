@@ -76,6 +76,15 @@ export const packageType = defineType({
       type: 'reference',
       to: { type: 'global' }, 
     }),
+    defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'string',
+      hidden: true, // Ẩn trường này khỏi giao diện
+      }),
+  ],
+  orderings: [
+    { title: 'Order Rank', name: 'orderRankAsc', by: [{ field: 'orderRank', direction: 'asc' }] }
   ],
   preview: {
     select: {

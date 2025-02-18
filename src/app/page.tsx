@@ -8,6 +8,7 @@ import Banner from "./component/banner";
 import DATA_MONTH from "./component/data_month";
 import DATA_DAY from "./component/data_day";
 import DATA_MORE from "./component/data_more";
+import Image from 'next/image';
 
 interface Category {
   title: string;
@@ -93,7 +94,7 @@ export default function Home() {
                   <div key={post._id}>
                     <div className="p-4 ">
                       <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
-                        <img
+                        <Image
                           className="lg:h-60 md:h-36 w-full object-cover object-center"
                           src={post.mainImage?.asset?.url}
                           alt="blog"
@@ -200,7 +201,7 @@ export default function Home() {
                     <div key={post._id}>
                       <SwiperSlide className="flex justify-center items-center ">
                         <div className="h-full  border-opacity-60 rounded-lg overflow-hidden bg-white box-shadow-basic">
-                          <img
+                          <Image
                             className="lg:h-60 md:h-36 w-full object-cover object-center"
                             src={post.mainImage?.asset?.url}
                             alt="blog"

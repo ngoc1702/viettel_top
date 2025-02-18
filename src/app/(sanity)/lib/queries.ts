@@ -40,7 +40,7 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
 }`)
 
 export const POSTS_QUERY2 = defineQuery(`
-  *[_type == "package" && defined(slug.current)][0...1000]{
+  *[_type == "package" && defined(slug.current)][0...1000] | order(orderRank asc) {
     _id, 
     title, 
     slug, 
@@ -71,8 +71,8 @@ export const POSTS_QUERY2 = defineQuery(`
     globalField[]-> {
       title
     },
-    "globalField": *[_type == "global"][0].globalField
-
+    "globalField": *[_type == "global"][0].globalField,
+    orderRank
   }`);
 
 // export const POSTS_QUERY2 = defineQuery(`*[_type == "package" && !defined(subCategory) && defined(slug.current)][0...12]{
