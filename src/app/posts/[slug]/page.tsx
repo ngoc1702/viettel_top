@@ -40,7 +40,7 @@ const fetchPost = async (slug: string): Promise<Post | null> => {
 const PortableTextComponents = {
   types: {
     image: ({ value }: { value: ImageValue }) => (
-      <div clagitssName="my-6">
+      <div className="my-6">
         <Image
           src={urlFor(value).url()}
           alt={value.alt || "Image"}
@@ -85,7 +85,7 @@ console.log(post.title,"FFFFFF");
         <span className="mt-1 text-gray-500 text-base">
           {new Date(post._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
         </span>
-        <Image
+        <img
           className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
           src={urlFor(post.mainImage).url() || ''}
           alt={post.mainImage?.alt || 'Post image'}

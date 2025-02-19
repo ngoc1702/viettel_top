@@ -47,6 +47,7 @@ export const POSTS_QUERY2 = defineQuery(`
     traffic, 
     price, 
     time,
+    timeTraffic,
     mainImage {
       asset-> {
         url

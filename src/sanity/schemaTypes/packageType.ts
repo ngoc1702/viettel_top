@@ -23,6 +23,10 @@ export const packageType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'timeTraffic',
+      type: 'string',
+    }),
+    defineField({
       name: 'price',
       type: 'string',
     }),

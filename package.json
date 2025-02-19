@@ -28,7 +28,7 @@
     "react-spinners": "^0.15.0",
     "sanity": "^3.65.0",
     "styled-components": "^6.1.13",
-    "swiper": "^11.1.15"
+    "swiper": "^11.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

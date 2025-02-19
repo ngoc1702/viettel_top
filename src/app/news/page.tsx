@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY } from "../(sanity)/lib/queries";
-import Image from 'next/image';
+// import Image from 'next/image';
 
 interface Category {
   title: string;
@@ -67,7 +68,7 @@ export default function Page() {
             <div key={post._id}>
             <div className="px-4 ">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 h-full overflow-hidden">
-                <Image
+                <img
                   className="lg:h-80 md:h-36 h-[30vh] w-full rounded-lg object-cover object-center "
                   src={post.mainImage?.asset?.url}
                   alt="blog"
@@ -170,7 +171,7 @@ export default function Page() {
                 <div key={post._id}>
                   <div className="p-4 ">
                     <div className="h-full border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
-                      <Image
+                      <img
                         className="lg:h-60 md:h-36 w-full object-cover object-center"
                         src={post.mainImage?.asset?.url}
                         alt="blog"
@@ -261,7 +262,8 @@ export default function Page() {
             <Swiper
               spaceBetween={30}
               slidesPerView={1.5}
-              // loop={true}
+              freeMode= {true}
+              modules={[FreeMode]}
               autoplay={{ delay: 2500 }}
               className="mySwiper"
             >
@@ -272,7 +274,7 @@ export default function Page() {
                   <div key={post._id}>
                     <SwiperSlide className="flex justify-center items-center ">
                       <div className="h-full  border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
-                        <Image
+                        <img
                           className="lg:h-60 md:h-36 w-full object-cover object-center"
                           src={post.mainImage?.asset?.url}
                           alt="blog"

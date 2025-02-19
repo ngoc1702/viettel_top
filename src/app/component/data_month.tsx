@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY2 } from "../(sanity)/lib/queries";
@@ -30,6 +31,7 @@ interface Post {
   };
   title: string;
   traffic: string;
+  timeTraffic :string;
   time: string;
   price: string;
   globalField: string;
@@ -150,9 +152,11 @@ export default function DATA_MONTH() {
                                 <span className="text-[#CE2127]">
                                   {post?.traffic}
                                 </span>
-                                <span className="text-lg ml-1 font-semibold text-gray-900">
-                                  /NGÀY
-                                </span>
+                                {post?.timeTraffic && (
+                                  <span className="text-lg ml-1 font-semibold text-gray-900">
+                                    / {post.timeTraffic}
+                                  </span>
+                                )}
                               </h1>
 
                               {post?.gallery?.length > 0 && (
@@ -246,6 +250,7 @@ export default function DATA_MONTH() {
                   slidesPerView={2.2}
                   autoplay={{ delay: 100 }}
                   freeMode={true}
+                  modules={[FreeMode]}
                   className="mySwiper "
                 >
                   {filteredPosts.map((post: Post) => (
@@ -266,9 +271,11 @@ export default function DATA_MONTH() {
                             <span className="text-[#CE2127] mb-1">
                               {post?.traffic}
                             </span>
-                            <span className="text-base ml-1 font-semibold text-gray-900">
-                              /NGÀY
-                            </span>
+                            {post?.timeTraffic && (
+                                                <span className="text-base ml-1 font-semibold text-gray-900">
+                                                  / {post?.timeTraffic}
+                                                </span>
+                                                )}
                           </h1>
                           {post?.gallery?.length > 0 && (
                                 <>
@@ -353,7 +360,7 @@ export default function DATA_MONTH() {
               >
                 Đóng
               </button>
-              <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=HNI1_TTHKM_VTP_00038_DB">
+              <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD">
                 <button className="min-w-[120px] flex justify-center items-center gap-1 text-white bg-[#CE2127] border-0 py-[8.5px] px-6 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
                   Kiểm tra ngay
                 </button>

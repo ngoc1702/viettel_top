@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY2 } from "../(sanity)/lib/queries";
@@ -32,6 +33,7 @@ interface Post {
   title: string;
   traffic: string;
   time: string;
+  timeTraffic :string;
   price: string;
   globalField: string;
   categories: Category[];
@@ -134,7 +136,7 @@ export default function DATA_MORE() {
                             <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                               Gói cước {title}
                             </h3>
-        
+
                             <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1 mb-4">
                               {filteredPosts.map((post: Post) => (
                                 <div key={post._id}>
@@ -143,41 +145,50 @@ export default function DATA_MORE() {
                                       <div className="bg-[#CE2127] text-white px-3 py-1 text-2xl font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
                                         {post.title}
                                       </div>
-        
+
                                       <h1 className="mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                                         <span className="text-[#CE2127]">
                                           {post?.traffic}
                                         </span>
-                                        <span className="text-lg ml-1 font-semibold text-gray-900">
-                                          /NGÀY
-                                        </span>
+                                        {post?.timeTraffic && (
+                                          <span className="text-lg ml-1 font-semibold text-gray-900">
+                                            / {post.timeTraffic}
+                                          </span>
+                                        )}
                                       </h1>
-        
+
                                       {post?.gallery?.length > 0 && (
                                         <>
                                           <h2 className="text-base tracking-widest title-font mb-1 font-medium">
                                             MIỄN PHÍ
                                           </h2>
-        
+
                                           <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                            {post.gallery.map((image: Image) => (
-                                              <div key={image.asset._id}>
-                                                <Image
-                                                  src={image.asset.url}
-                                                  alt={image.caption || "Gallery Image"}
-                                                  width={30}
-                                                  height={30}
-                                                  style={{ objectFit: "cover" }}
-                                                />
-                                                {image.caption && (
-                                                  <p>{image.caption}</p>
-                                                )}
-                                              </div>
-                                            ))}
+                                            {post.gallery.map(
+                                              (image: Image) => (
+                                                <div key={image.asset._id}>
+                                                  <Image
+                                                    src={image.asset.url}
+                                                    alt={
+                                                      image.caption ||
+                                                      "Gallery Image"
+                                                    }
+                                                    width={30}
+                                                    height={30}
+                                                    style={{
+                                                      objectFit: "cover",
+                                                    }}
+                                                  />
+                                                  {image.caption && (
+                                                    <p>{image.caption}</p>
+                                                  )}
+                                                </div>
+                                              )
+                                            )}
                                           </span>
                                         </>
                                       )}
-        
+
                                       <h2 className="mt-4 font-bold text-gray-900 leading-none flex items-end pb-4 mb-4">
                                         <span className="text-3xl text-gray-900">
                                           {post?.price}
@@ -186,7 +197,7 @@ export default function DATA_MORE() {
                                           /{post?.time}
                                         </span>
                                       </h2>
-        
+
                                       <div className="flex gap-6">
                                         <button
                                           onClick={() => handleOpenPopup(post)}
@@ -194,7 +205,9 @@ export default function DATA_MORE() {
                                         >
                                           Đăng ký
                                         </button>
-                                        <a href={`/package/${post?.slug.current}`}>
+                                        <a
+                                          href={`/package/${post?.slug.current}`}
+                                        >
                                           <button className="min-w-[100px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded-[25px] font-semibold">
                                             Chi tiết
                                           </button>
@@ -243,6 +256,7 @@ export default function DATA_MORE() {
                   slidesPerView={2.2}
                   autoplay={{ delay: 100 }}
                   freeMode= {true}
+                  modules={[FreeMode]}
                   className="mySwiper"
                 >
                   {filteredPosts.map((post: Post) => (
@@ -263,9 +277,11 @@ export default function DATA_MORE() {
                                                 <span className="text-[#CE2127] mb-1">
                                                   {post?.traffic}
                                                 </span>
+                                                {post?.timeTraffic && (
                                                 <span className="text-base ml-1 font-semibold text-gray-900">
-                                                  /NGÀY
+                                                  / {post?.timeTraffic}
                                                 </span>
+                                                )}
                                               </h1>
                                               {post?.gallery?.length > 0 && (
                                                     <>
@@ -350,7 +366,7 @@ export default function DATA_MORE() {
               >
                 Đóng
               </button>
-              <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=HNI1_TTHKM_VTP_00038_DB">
+              <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD">
                 <button className="min-w-[120px] flex justify-center items-center gap-1 text-white bg-[#CE2127] border-0 py-[8.5px] px-6 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
                   Kiểm tra ngay
                 </button>

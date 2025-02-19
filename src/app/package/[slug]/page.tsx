@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import "swiper/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { client } from "../../../sanity/lib/client";
@@ -24,6 +26,7 @@ const POSTS_QUERY2 = `*[_type == "package"]{
   traffic,
   price,
   time,
+  timeTraffic,
   mainImage {
     asset-> {
       url
@@ -73,6 +76,7 @@ interface Post {
   traffic: string;
   price: string;
   time: string;
+  timeTraffic :string;
   mainImage: {
     asset: {
       url: string;
@@ -99,6 +103,7 @@ const fetchPost = async (slug: string): Promise<Post> => {
       traffic, 
       price, 
       time,
+      timeTraffic,
       mainImage {
         asset-> {
           url
@@ -290,7 +295,10 @@ export default function Page({
                     Dung lượng tốc độ cao
                   </span>
                   <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                    {selectedPost.traffic}/ngày
+                    {selectedPost.traffic} 
+                    {selectedPost?.timeTraffic && (
+                    <span className="text-gray-900 text-base md:text-base font-bold mt-1">/ {selectedPost.timeTraffic}</span>
+                  )}
                   </span>
                 </span>
               </a>
@@ -330,7 +338,7 @@ export default function Page({
           </div>
         </div>
 
-        <Image
+        <img 
           className="lg:h-[70vh] md:h-36 w-full object-cover object-center "
           src={urlFor(selectedPost.mainImage).url()}
           alt={selectedPost.mainImage?.alt}
@@ -391,9 +399,11 @@ export default function Page({
 
                       <h1 className="mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                         <span className="text-[#CE2127]">{post?.traffic}</span>
-                        <span className="text-lg ml-1 font-semibold text-gray-900">
-                          /NGÀY
-                        </span>
+                        {post?.timeTraffic && (
+                                          <span className="text-lg ml-1 font-semibold text-gray-900">
+                                            / {post.timeTraffic}
+                                          </span>
+                                        )}
                       </h1>
 
                       {post?.gallery?.length > 0 && (
@@ -452,7 +462,8 @@ export default function Page({
               spaceBetween={8}
               slidesPerView={2.2}
               autoplay={{ delay: 100 }}
-              freeMode={false}
+              freeMode= {true}
+              modules={[FreeMode]}
               className="mySwiper"
             >
               {posts
@@ -483,9 +494,11 @@ export default function Page({
                           <span className="text-[#CE2127] mb-1">
                             {post?.traffic}
                           </span>
-                          <span className="text-base ml-1 font-semibold text-gray-900">
-                            /NGÀY
-                          </span>
+                          {post?.timeTraffic && (
+                                                <span className="text-base ml-1 font-semibold text-gray-900">
+                                                  / {post?.timeTraffic}
+                                                </span>
+                                                )}
                         </h1>
                         {post?.gallery?.length > 0 && (
                           <>
@@ -565,7 +578,7 @@ export default function Page({
                   >
                     Đóng
                   </button>
-                  <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=HNI1_TTHKM_VTP_00038_DB">
+                  <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD">
                     <button className="min-w-[120px] flex justify-center items-center gap-1 text-white bg-[#CE2127] border-0 py-[8.5px] px-6 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
                       Kiểm tra ngay
                     </button>
