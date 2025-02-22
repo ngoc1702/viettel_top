@@ -320,7 +320,7 @@ export default function DATA_MORE() {
                                               {/* Actions */}
                                               <div className="flex flex-col gap-2">
                                                 {/* Register Button */}
-                                                <button
+                                                {/* <button
                                                   className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
                                                   onClick={() => {
                                                     const phoneNumber = "290";
@@ -331,7 +331,15 @@ export default function DATA_MORE() {
                                                   }}
                                                 >
                                                   Đăng ký
-                                                </button>
+                                                </button> */}
+                                                 <button className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
+                              <a
+                                className="w-full h-full flex items-center justify-center"
+                                href={`sms:290?body=${encodeURIComponent(`${post.title} ${post.globalField}`)}`}
+                              >
+                                Đăng ký
+                              </a>
+                            </button>
                                               </div>
                                             </div>
                                           </div>

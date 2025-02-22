@@ -53,6 +53,7 @@ export default function Home() {
   return (
     <div>
       <title>Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng</title>
+      <meta name="description" content="Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng" />
       <Banner />
       <section className="mt-6 mb-6 px-3 md:px-0 mx-auto text-center">
         <p className="uppercase font-bold text-[20px] leading-[50px] max-md:max-w-full max-md:text-lg max-md:leading-[50px]">

@@ -73,10 +73,21 @@ const PostPage = async ({ params }: PageProps) => {
   }
 console.log(post.title,"FFFFFF");
 
+
+const extractText = (blocks: PortableTextBlock[] | undefined, maxLength: number = 160) => {
+  if (!blocks) return "Mô tả mặc định nếu không có";
+
+  const text = blocks
+    .map(block => block.children?.map(child => child.text).join(" ") || "")
+    .join(" ");
+
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+};
   return ( 
     <>
    
         <title>{post.title}</title>
+        <meta name="description" content={extractText(post?.body)} />
      
       <div className="max-content px-5 md:px-0 py-12 md:py-20 mt-20">
         <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">

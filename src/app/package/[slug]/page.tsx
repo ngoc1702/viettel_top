@@ -76,7 +76,7 @@ interface Post {
   traffic: string;
   price: string;
   time: string;
-  timeTraffic :string;
+  timeTraffic: string;
   mainImage: {
     asset: {
       url: string;
@@ -224,8 +224,6 @@ export default function Page({
   if (!selectedPost) {
     return <div>Post not found</div>;
   }
-  
-  
 
   const handleOpenPopup = (post: Post) => {
     setSelectedPost(post);
@@ -237,10 +235,27 @@ export default function Page({
     // setSelectedPost(null); // Uncomment if you want to reset selectedPost
   };
 
+  const extractText = (
+    blocks: PortableTextBlock[] | undefined,
+    maxLength: number = 160
+  ) => {
+    if (!blocks) return "Mô tả mặc định nếu không có";
+
+    const text = blocks
+      .map(
+        (block) => block.children?.map((child) => child.text).join(" ") || ""
+      )
+      .join(" ");
+
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
   return (
     <div className="max-content px-3">
       <div className="relative">
         <title>{`Gói cước ${selectedPost.title}`}</title>
+        <meta name="description" content={extractText(selectedPost?.body)} />
 
         <div className="max-content md:px-0 py-12 m:py-20 mt-20 relative">
           <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
@@ -295,10 +310,12 @@ export default function Page({
                     Dung lượng tốc độ cao
                   </span>
                   <span className="text-gray-900 text-xl md:text-3xl font-bold mt-1">
-                    {selectedPost.traffic} 
+                    {selectedPost.traffic}
                     {selectedPost?.timeTraffic && (
-                    <span className="text-gray-900 text-base md:text-base font-bold mt-1">/ {selectedPost.timeTraffic}</span>
-                  )}
+                      <span className="text-gray-900 text-base md:text-base font-bold mt-1">
+                        / {selectedPost.timeTraffic}
+                      </span>
+                    )}
                   </span>
                 </span>
               </a>
@@ -338,7 +355,7 @@ export default function Page({
           </div>
         </div>
 
-        <img 
+        <img
           className="lg:h-[70vh] md:h-36 w-full object-cover object-center "
           src={urlFor(selectedPost.mainImage).url()}
           alt={selectedPost.mainImage?.alt}
@@ -359,18 +376,22 @@ export default function Page({
             Đăng ký
           </button>
 
-          <button
-                            className="text-sm flex md:hidden gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-3 px-12 focus:outline-none hover:bg-[#AA0000] rounded-[5px] font-semibold"
-                            onClick={() => {
-                              const phoneNumber = "290";
-                              const message = encodeURIComponent(
-                                `${selectedPost.title} ${selectedPost.globalField}`
-                              );
-                              window.location.href = `sms:${phoneNumber}?body=${message}`;
-                            }}
-                          >
-                            Đăng ký
-                          </button>
+          <button className="text-sm flex md:hidden gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-3 px-12 focus:outline-none hover:bg-[#AA0000] rounded-[5px] font-semibold">
+            <a
+              className="w-full h-full flex items-center justify-center text-white"
+              href={`sms:290?body=${encodeURIComponent(`${selectedPost.title} ${selectedPost.globalField}`)}`}
+            >
+              Đăng ký
+            </a>
+          </button>
+          {/* <button className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
+                              <a
+                                className="w-full h-full flex items-center justify-center"
+                                href={`sms:290?body=${encodeURIComponent(`${post.title} ${post.globalField}`)}`}
+                              >
+                                Đăng ký
+                              </a>
+                            </button> */}
         </div>
 
         {/* Display Similar Posts */}
@@ -400,10 +421,10 @@ export default function Page({
                       <h1 className="mt-10 text-4xl font-bold text-gray-900 leading-none flex items-end pb-4 mb-4 border-b border-gray-200">
                         <span className="text-[#CE2127]">{post?.traffic}</span>
                         {post?.timeTraffic && (
-                                          <span className="text-lg ml-1 font-semibold text-gray-900">
-                                            / {post.timeTraffic}
-                                          </span>
-                                        )}
+                          <span className="text-lg ml-1 font-semibold text-gray-900">
+                            / {post.timeTraffic}
+                          </span>
+                        )}
                       </h1>
 
                       {post?.gallery?.length > 0 && (
@@ -462,7 +483,7 @@ export default function Page({
               spaceBetween={8}
               slidesPerView={2.2}
               autoplay={{ delay: 100 }}
-              freeMode= {true}
+              freeMode={true}
               modules={[FreeMode]}
               className="mySwiper"
             >
@@ -495,10 +516,10 @@ export default function Page({
                             {post?.traffic}
                           </span>
                           {post?.timeTraffic && (
-                                                <span className="text-base ml-1 font-semibold text-gray-900">
-                                                  / {post?.timeTraffic}
-                                                </span>
-                                                )}
+                            <span className="text-base ml-1 font-semibold text-gray-900">
+                              / {post?.timeTraffic}
+                            </span>
+                          )}
                         </h1>
                         {post?.gallery?.length > 0 && (
                           <>

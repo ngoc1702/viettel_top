@@ -31,13 +31,18 @@ interface Post {
   };
   title: string;
   traffic: string;
-  timeTraffic :string;
+  timeTraffic: string;
   time: string;
   price: string;
   globalField: string;
   categories: Category[];
   sub_categories: Sub_Category[];
   gallery: Image[];
+}
+declare global {
+  interface Window {
+    dataLayer: { event: string; [key: string]: unknown }[];
+  }
 }
 
 export default function DATA_MONTH() {
@@ -272,35 +277,33 @@ export default function DATA_MONTH() {
                               {post?.traffic}
                             </span>
                             {post?.timeTraffic && (
-                                                <span className="text-base ml-1 font-semibold text-gray-900">
-                                                  / {post?.timeTraffic}
-                                                </span>
-                                                )}
+                              <span className="text-base ml-1 font-semibold text-gray-900">
+                                / {post?.timeTraffic}
+                              </span>
+                            )}
                           </h1>
                           {post?.gallery?.length > 0 && (
-                                <>
-                                  <h2 className="text-base tracking-widest title-font mb-1 font-medium">
-                                    MIỄN PHÍ
-                                  </h2>
+                            <>
+                              <h2 className="text-base tracking-widest title-font mb-1 font-medium">
+                                MIỄN PHÍ
+                              </h2>
 
-                                  <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
-                                    {post.gallery.map((image: Image) => (
-                                      <div key={image.asset._id}>
-                                        <Image
-                                          src={image.asset.url}
-                                          alt={image.caption || "Gallery Image"}
-                                          width={30}
-                                          height={30}
-                                          style={{ objectFit: "cover" }}
-                                        />
-                                        {image.caption && (
-                                          <p>{image.caption}</p>
-                                        )}
-                                      </div>
-                                    ))}
-                                  </span>
-                                </>
-                              )}
+                              <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
+                                {post.gallery.map((image: Image) => (
+                                  <div key={image.asset._id}>
+                                    <Image
+                                      src={image.asset.url}
+                                      alt={image.caption || "Gallery Image"}
+                                      width={30}
+                                      height={30}
+                                      style={{ objectFit: "cover" }}
+                                    />
+                                    {image.caption && <p>{image.caption}</p>}
+                                  </div>
+                                ))}
+                              </span>
+                            </>
+                          )}
                           {/* Price and Time */}
                           <h2 className="mt-2 font-bold text-gray-900 leading-none flex items-end pb-1 mb-2 border-b border-gray-200">
                             <span className="text-lg text-gray-900">
@@ -314,7 +317,7 @@ export default function DATA_MONTH() {
                           {/* Actions */}
                           <div className="flex flex-col gap-2">
                             {/* Register Button */}
-                            <button
+                            {/* <button
                               className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
                               onClick={() => {
                                 const phoneNumber = "290";
@@ -325,6 +328,14 @@ export default function DATA_MONTH() {
                               }}
                             >
                               Đăng ký
+                            </button> */}
+                            <button className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
+                              <a
+                                className="w-full h-full flex items-center justify-center"
+                                href={`sms:290?body=${encodeURIComponent(`${post.title} ${post.globalField}`)}`}
+                              >
+                                Đăng ký
+                              </a>
                             </button>
                           </div>
                         </div>
