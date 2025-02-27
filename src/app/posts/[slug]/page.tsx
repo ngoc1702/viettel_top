@@ -1,10 +1,12 @@
 import { client } from "../../../sanity/lib/client";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
-import { PortableTextComponentProps, PortableTextBlock } from "@portabletext/react";
+import {
+  PortableTextComponentProps,
+  PortableTextBlock,
+} from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import Image from 'next/image';
-
+import Image from "next/image";
 
 interface Post {
   title: string;
@@ -71,35 +73,42 @@ const PostPage = async ({ params }: PageProps) => {
   if (!post) {
     return <div>Post not found</div>;
   }
-console.log(post.title,"FFFFFF");
+  console.log(post.title, "FFFFFF");
 
+  const extractText = (
+    blocks: PortableTextBlock[] | undefined,
+    maxLength: number = 160
+  ) => {
+    if (!blocks) return "Mô tả mặc định nếu không có";
 
-const extractText = (blocks: PortableTextBlock[] | undefined, maxLength: number = 160) => {
-  if (!blocks) return "Mô tả mặc định nếu không có";
+    const text = blocks
+      .map(
+        (block) => block.children?.map((child) => child.text).join(" ") || ""
+      )
+      .join(" ");
 
-  const text = blocks
-    .map(block => block.children?.map(child => child.text).join(" ") || "")
-    .join(" ");
-
-  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-};
-  return ( 
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
+  return (
     <>
-   
-        <title>{post.title}</title>
-        <meta name="description" content={extractText(post?.body)} />
-     
+      <title>{post.title}</title>
+      <meta name="description" content={extractText(post?.body)} />
+
       <div className="max-content px-5 md:px-0 py-12 md:py-20 mt-20">
         <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
-          {post.title} 
+          {post.title}
         </h1>
         <span className="mt-1 text-gray-500 text-base">
-          {new Date(post._createdAt).toLocaleDateString('en-GB').replace(/\//g, '-')}
+          {new Date(post._createdAt)
+            .toLocaleDateString("en-GB")
+            .replace(/\//g, "-")}
         </span>
         <img
           className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
-          src={urlFor(post.mainImage).url() || ''}
-          alt={post.mainImage?.alt || 'Post image'}
+          src={urlFor(post.mainImage).url() || ""}
+          alt={post.mainImage?.alt || "Post image"}
         />
         <div className="mt-6">
           <PortableText value={post.body} components={PortableTextComponents} />

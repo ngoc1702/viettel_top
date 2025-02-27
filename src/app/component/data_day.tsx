@@ -135,7 +135,6 @@ export default function DATA_DAY() {
                     <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                       Gói cước {title}
                     </h3>
-
                     <div className="grid xl:grid-cols-4 md:grid-cols-2 -m-4 z-1 mb-4">
                       {filteredPosts.map((post: Post) => (
                         <div key={post._id}>

@@ -18,7 +18,7 @@ import Clock from "@public/assets/img/clock.svg";
 import Traffic from "@public/assets/img/data.svg";
 import SMS from "@public/assets/img/sms (1).svg";
 import SmsButton from "@/app/component/button";
-
+// import Head from "next/head";
 const POSTS_QUERY2 = `*[_type == "package"]{
   _id,
   title,
@@ -235,28 +235,22 @@ export default function Page({
     // setSelectedPost(null); // Uncomment if you want to reset selectedPost
   };
 
-  const extractText = (
-    blocks: PortableTextBlock[] | undefined,
-    maxLength: number = 160
-  ) => {
+  const extractText = (blocks: PortableTextBlock[] | undefined, maxLength: number = 160) => {
     if (!blocks) return "Mô tả mặc định nếu không có";
-
+  
     const text = blocks
-      .map(
-        (block) => block.children?.map((child) => child.text).join(" ") || ""
-      )
+      .map(block => block.children?.map(child => child.text).join(" ") || "")
       .join(" ");
-
-    return text.length > maxLength
-      ? text.substring(0, maxLength) + "..."
-      : text;
+  
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   };
   return (
+    
+    <>
+    <title>{`Gói cước ${selectedPost.title}`}</title>
+    <meta name="description" content={extractText(selectedPost?.body)} />
     <div className="max-content px-3">
       <div className="relative">
-        <title>{`Gói cước ${selectedPost.title}`}</title>
-        <meta name="description" content={extractText(selectedPost?.body)} />
-
         <div className="max-content md:px-0 py-12 m:py-20 mt-20 relative">
           <h1 className="text-4xl font-bold title-font text-gray-900 mb-3">
             GÓI CƯỚC{" "}
@@ -618,5 +612,6 @@ export default function Page({
         </div>
       </div>
     </div>
+    </>
   );
 }

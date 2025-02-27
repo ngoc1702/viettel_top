@@ -89,9 +89,41 @@ body {
 .swiper-wrapper{
   display: flex;
 }
+h1 {
+  display: block;
+  font-size: 2.1em ;
+  font-weight: bold !;
+  unicode-bidi: isolate;
+  font-family: inherit ;
+}
+h2{
+  display: block;
+  font-size: 1.65em ;
+  font-weight: bold ;
+  unicode-bidi: isolate;
+font-family: inherit ;
+}
+h3 {
+  display: block;
+  font-size: 1.27em ;
+  font-weight: bold ;
+  unicode-bidi: isolate;
+font-family: inherit ;
+}
+h4 {
+  display: block;
+  font-weight: bold ;
+  unicode-bidi: isolate;
+font-family: inherit ;
+}
+
+ul, ol, menu {
+  list-style: revert; 
+  padding-left: 40px;
+}
 /* Media query cho mobile */
 @media (max-width: 768px) {
   .gallery-item {
-    max-width: 20px; /* Giảm kích thước ảnh cho mobile */
+    max-width: 20px; 
   }
 }
