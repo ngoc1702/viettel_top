@@ -92,53 +92,8 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
             "availability": "https://schema.org/InStock"
           },
         })),
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Tôi nên chọn gói cước Viettel nào để dùng hàng ngày?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Bạn có thể chọn các gói SD70, SD90 hoặc SD135 tuỳ theo nhu cầu sử dụng từ 1GB đến 5GB/ngày."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Gói cước Viettel có tự động gia hạn không?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Có, tất cả các gói sẽ tự động gia hạn khi kết thúc chu kỳ nếu tài khoản đủ tiền."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Tôi có thể hủy gói cước Viettel như thế nào?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Bạn chỉ cần soạn tin nhắn theo cú pháp: HUY [Tên gói] gửi 191."
-              }
-            }
-          ]
-        },
-        {
-          "@type": "HowTo",
-          "name": "Cách đăng ký gói cước Viettel",
-          "step": [
-            {
-              "@type": "HowToStep",
-              "text": "Bước 1: Mở ứng dụng nhắn tin trên điện thoại."
-            },
-            {
-              "@type": "HowToStep",
-              "text": "Bước 2: Soạn cú pháp: [Tên gói] UP gửi 290."
-            },
-            {
-              "@type": "HowToStep",
-              "text": "Bước 3: Chờ tin nhắn xác nhận từ tổng đài Viettel."
-            }
-          ]
-        }
+       
+      
       ]
     })
   }}

@@ -99,7 +99,7 @@ export default async function Page({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: post.title,
-    description: extractText(post.body),
+    // description: extractText(post.body),
     offers: {
       "@type": "Offer",
       priceCurrency: "VND",
