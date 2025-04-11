@@ -1,56 +1,14 @@
 
-// import { client } from "./(sanity)/lib/client";
-// import React, { useState, useEffect } from "react";
-// import { POSTS_QUERY } from "./(sanity)/lib/queries";
-// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Banner from "./component/banner";
 import DATA_MONTH from "./component/data_month";
 import DATA_DAY from "./component/data_day";
 import DATA_MORE from "./component/data_more";
 import POSTS from "./component/posts";
-// import Image from 'next/image';
 
-// interface Category {
-//   title: string;
-// }
-// interface Post {
-//   sort(arg0: (a: number, b: number) => number): unknown;
-//   _id: number;
-//   slug: {
-//     current: string;
-//   };
-//   title: string;
-//   categories: Category[];
-//   _createdAt: string;
-//   mainImage: {
-//     asset: {
-//       url: string;
-//     };
-//   };
-//   authorName: string;
-// }
-export default function Home() {
-  // const [posts, setPosts] = useState<Post[] | null>(null);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const posts: Post[] = await client.fetch(POSTS_QUERY);
+export default async function Home() {
 
-  //       if (!posts) {
-  //         throw new Error("Failed to fetch posts");
-  //       }
-  //       setPosts(posts);
-  //     } catch (error) {
-  //       console.error("Error fetching posts:", error);
-  //     } finally {
-  //       console.log("Fetch posts process complete");
-  //     }
-  //   };
-
-  //   fetchPosts();
-  // }, []);
   return (
     <div>
       <title>Đăng Ký 4G Viettel - Cách Đăng Ký Gói Cước 4G Nhanh Chóng</title>

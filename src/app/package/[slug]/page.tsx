@@ -9,7 +9,7 @@ import Traffic from "@public/assets/img/data.svg";
 import SMS from "@public/assets/img/sms (1).svg";
 import SmsButton from "@/app/component/button";
 import PACKAGE_SIMILAR from "@/app/component/package_similar";
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 
 interface Post {
   title: string;
@@ -37,11 +37,11 @@ interface Post {
   }[];
 }
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
+
+
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 const fetchPost = async (slug: string): Promise<Post | null> => {
   const query = `
     *[_type == "package" && slug.current == $slug][0]{
@@ -74,26 +74,94 @@ const fetchPost = async (slug: string): Promise<Post | null> => {
   return await client.fetch(query, { slug });
 };
 
-// This enables SSR and metadata injection
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const post = await fetchPost(params.slug);
-  return {
-    title: post?.title || "Gói cước",
-    description:
-      post?.body?.[0]?.children?.[0]?.text || "Thông tin chi tiết gói cước",
-  };
-}
 
+const extractText = (
+  blocks: PortableTextBlock[] | undefined,
+  maxLength: number = 180
+) => {
+  if (!blocks) return "Mô tả mặc định nếu không có";
+
+  const text = blocks
+    .map(
+      (block) => block.children?.map((child) => child.text).join(" ") || ""
+    )
+    .join(" ");
+
+  return text.length > maxLength
+    ? text.substring(0, maxLength) + "..."
+    : text;
+};
 export default async function Page({ params }: PageProps) {
-  const post = await fetchPost(params.slug);
+  const resolvedParams = await params; // Resolve the Promise
+  const post = await fetchPost(resolvedParams.slug);
   if (!post) return <div>Không tìm thấy gói cước</div>;
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: post.title,
+    description: extractText(post.body),
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "VND",
+      price: post.price,
+      availability: "https://schema.org/InStock",
+    },
+    sku: post.slug?.current,
+    category: post.categories?.[0]?.title || "MobileDataPlan",
+    brand: {
+      "@type": "Brand",
+      name: "Viettel",
+    },
+  };
+  
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `Gói ${post.title} có gì nổi bật?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Gói ${post.title} với ${post.traffic}, giá chỉ ${post.price}đ/tháng.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Làm sao để đăng ký gói ${post.title}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Soạn tin: ${post.slug.current} UP gửi 290.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Gói ${post.title} có tự động gia hạn không?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Có. Gói sẽ tự động gia hạn nếu tài khoản đủ tiền. Soạn HUY ${post.slug.current} gửi 191 để hủy.`,
+        },
+      },
+    ],
+  };
+  
 
   return (
     <>
+    <title>{post.title}</title>
+    <meta name="description" content={extractText(post?.body)} />
+    <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(productSchema),
+    }}
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(faqSchema),
+    }}
+  />
       <div className="max-content px-3">
         <div className="relative">
           <div className="max-content md:px-0 py-12 m:py-20 mt-20 relative">
@@ -205,7 +273,8 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
       </div>
-      <PACKAGE_SIMILAR slug={params.slug} />
+      <PACKAGE_SIMILAR slug={resolvedParams.slug} />
+
     </>
   );
 }

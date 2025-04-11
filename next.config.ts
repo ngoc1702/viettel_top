@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   //     dynamic:30,
   //   },
   // },
+  images: {
+    domains: ['cdn.sanity.io'],
+  },
 };
 
 

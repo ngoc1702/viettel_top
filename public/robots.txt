@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://vietteltelecom.co
+
+# Sitemaps
+Sitemap: https://vietteltelecom.co/sitemap.xml

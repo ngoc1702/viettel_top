@@ -1,7 +1,7 @@
 "use client"; 
 import { useState } from "react";
 import sanityClient from "@sanity/client";
-import { Block, Child } from "@portabletext/types"; // Import from @portabletext/types
+import type { PortableTextBlock } from "@portabletext/types";
 
 // Khởi tạo Sanity client
 const client = sanityClient({
@@ -45,16 +45,21 @@ const ReplaceWord = () => {
           await client.patch(post._id).set({ body: updatedBody }).commit();
         } else if (Array.isArray(post.body)) {
           // If body is an array (Portable Text), extract text and replace
-          const updatedBody = post.body.map((block: Block) => {
-            if (block._type === 'block' && block.children) {
-              block.children.forEach((child: Child) => {
-                if (child.text) {
-                  child.text = child.text.replace(new RegExp(oldWord, "g"), newWord);
+          const updatedBody = post.body.map((block: PortableTextBlock) => {
+            if (block._type === 'block' && Array.isArray(block.children)) {
+              block.children = block.children.map((child) => {
+                if ('text' in child && typeof child.text === 'string') {
+                  return {
+                    ...child,
+                    text: child.text.replace(new RegExp(oldWord, 'g'), newWord),
+                  };
                 }
+                return child;
               });
             }
             return block;
           });
+          
 
           await client.patch(post._id).set({ body: updatedBody }).commit();
         }

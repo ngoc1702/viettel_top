@@ -65,6 +65,82 @@ export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
   // ... phần render UI (tuỳ bạn viết thêm)
 
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "name": "Vietteltelecom",
+              "url": "https://vietteltelecom.co",
+            },
+            ...posts.map(post => ({
+              "@type": "Product",
+              "name": post.title,
+              "description": `${post.title} là gói cước Viettel tháng với ưu đãi ${post.traffic}. Giá chỉ ${post.price}/tháng.`,
+              "sku": post.slug.current,
+              
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "VND",
+                "price": post.price.replace(/\D/g, ""),
+                "availability": "https://schema.org/InStock"
+              },
+            })),
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Tôi nên chọn gói cước Viettel nào để dùng hàng ngày?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bạn có thể chọn các gói SD70, SD90 hoặc SD135 tuỳ theo nhu cầu sử dụng từ 1GB đến 5GB/ngày."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Gói cước Viettel có tự động gia hạn không?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Có, tất cả các gói sẽ tự động gia hạn khi kết thúc chu kỳ nếu tài khoản đủ tiền."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Tôi có thể hủy gói cước Viettel như thế nào?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bạn chỉ cần soạn tin nhắn theo cú pháp: HUY [Tên gói] gửi 191."
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "HowTo",
+              "name": "Cách đăng ký gói cước Viettel",
+              "step": [
+                {
+                  "@type": "HowToStep",
+                  "text": "Bước 1: Mở ứng dụng nhắn tin trên điện thoại."
+                },
+                {
+                  "@type": "HowToStep",
+                  "text": "Bước 2: Soạn cú pháp: [Tên gói] UP gửi 290."
+                },
+                {
+                  "@type": "HowToStep",
+                  "text": "Bước 3: Chờ tin nhắn xác nhận từ tổng đài Viettel."
+                }
+              ]
+            }
+          ]
+        })
+      }}
+    />
     <div className="max-content px-3 md:px-0 mb-20  z-1">
           <div className="flex justify-between items-center">
             <h1 className="uppercase md:px-0 font-bold text-[45px] leading-[80px] max-md:max-w-full max-md:text-2xl max-md:leading-[36px]">
@@ -353,5 +429,6 @@ export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
             </div>
           )}
         </div>
+        </>
   );
 }

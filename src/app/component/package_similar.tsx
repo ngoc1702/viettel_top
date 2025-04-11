@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
@@ -8,13 +9,13 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY2 } from "../(sanity)/lib/queries";
 import Image from "next/image";
+
 interface Category {
   title: string;
 }
 interface Sub_Category {
   title: string;
 }
-
 interface Image {
   asset: {
     url: string;
@@ -22,7 +23,6 @@ interface Image {
   };
   caption?: string;
 }
-
 interface Post {
   title: string;
   traffic: string;
@@ -36,7 +36,6 @@ interface Post {
     alt: string;
   };
   _createdAt: string;
-  // body: PortableTextBlock[];
   slug: {
     current: string;
   };
@@ -45,6 +44,7 @@ interface Post {
   sub_categories: Sub_Category[];
   gallery: Image[];
 }
+
 const fetchPost = async (slug: string): Promise<Post | null> => {
   const query = `
     *[_type == "package" && slug.current == $slug][0]{
@@ -71,6 +71,8 @@ const fetchPost = async (slug: string): Promise<Post | null> => {
   `;
   return await client.fetch(query, { slug });
 };
+
+// ✅ Đây là component hiển thị gói tương tự
 export default function PACKAGE_SIMILAR({ slug }: { slug: string }) {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);

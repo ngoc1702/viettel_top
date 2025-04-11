@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "typegen": " sanity schema extract --path=src/sanity/extract.json && sanity typegen generate "
@@ -24,6 +25,7 @@
     "next": "^15.0.3",
     "next-sanity": "^9.8.19",
     "next-seo": "^6.6.0",
+    "next-sitemap": "^4.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.4.0",
