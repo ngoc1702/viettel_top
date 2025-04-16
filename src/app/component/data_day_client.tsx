@@ -69,7 +69,7 @@ export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
     ),
   ];
 
-  // ... phần render UI (tuỳ bạn viết thêm)
+
 
   return (
     <>
