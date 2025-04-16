@@ -26,12 +26,6 @@ body {
   margin-left:auto;
 }
 
-/* Ẩn toast debug Next.js */
-[data-nextjs-toast] {
-  display: none !important;
-}
-
-
 
 .box-shadow-basic {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
@@ -124,7 +118,7 @@ h4 {
 font-family: inherit ;
 }
 
-ul, ol, menu {
+ul, ol {
   list-style: revert; 
   padding-left: 40px;
 }

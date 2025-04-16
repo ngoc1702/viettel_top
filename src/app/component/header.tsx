@@ -32,7 +32,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD"><button
+        <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD" aria-label="Đăng nhập"><button
           className="hidden md:inline-flex items-center bg-[#CE2127] text-white border-0 py-3 px-6 focus:outline-none hover:bg-[#AA0000] rounded text-base mt-4 md:mt-0"
         >
           Đăng nhập

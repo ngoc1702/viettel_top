@@ -151,7 +151,7 @@ export default function PACKAGE_SIMILAR({ slug }: { slug: string }) {
           </button>
 
           <button className="text-sm flex md:hidden gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-3 px-12 focus:outline-none hover:bg-[#AA0000] rounded-[5px] font-semibold">
-            <a
+            <a aria-label="Đăng ký"
               className="w-full h-full flex items-center justify-center text-white"
               href={`sms:290?body=${encodeURIComponent(`${selectedPost.title} ${selectedPost.globalField}`)}`}
             >
@@ -237,7 +237,7 @@ export default function PACKAGE_SIMILAR({ slug }: { slug: string }) {
                       >
                         Đăng ký
                       </button>
-                      <a href={`/package/${post?.slug.current}`}>
+                      <a href={`/package/${post?.slug.current}`} aria-label="Xem chi tiết">
                         <button className="min-w-[100px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded-[25px] font-semibold">
                           Chi tiết
                         </button>
@@ -276,7 +276,7 @@ export default function PACKAGE_SIMILAR({ slug }: { slug: string }) {
                   <div className="w-full">
                     <div className=" min-w-[170px] min-h-[275px] justify-between items-center h-full p-4 rounded-[40px] flex flex-col relative bg-white light-pink-shadow my-2 mx-[2px]">
                       {/* Post Title */}
-                      <a href={`/package/${post?.slug.current}`}>
+                      <a href={`/package/${post?.slug.current}`} aria-label="Xem chi tiết">
                         <span className="bg-[#CE2127] text-white px-3 py-1 text-sm font-bold tracking-tight absolute right-[50%] translate-x-1/2 top-0 rounded-b-[15px]">
                           {post?.title}
                         </span>
@@ -367,7 +367,7 @@ export default function PACKAGE_SIMILAR({ slug }: { slug: string }) {
                 >
                   Đóng
                 </button>
-                <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD">
+                <a href="https://viettel.vn/lan-toa/goi-cuoc?kh=VANLTH_HNI_HKD" aria-label="Kiểm tra ngay">
                   <button className="min-w-[120px] flex justify-center items-center gap-1 text-white bg-[#CE2127] border-0 py-[8.5px] px-6 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
                     Kiểm tra ngay
                   </button>

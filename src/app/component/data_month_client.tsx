@@ -76,8 +76,8 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
       "@graph": [
         {
           "@type": "Organization",
-          "name": "Vietteltelecom",
-          "url": "https://vietteltelecom.co",
+          "name": "Viettelone",
+          "url": "https://viettelone.vn",
         },
         ...posts.map(post => ({
           "@type": "Product",
@@ -109,7 +109,7 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
             </h1>
             <button
               onClick={toggleContent}
-              className="md:w-12 md:h-12   md:bg-gray-200  rounded-full items-center"
+              className="md:w-12 md:h-12   md:bg-gray-200  rounded-full items-center" aria-label="Toogle"
             >
               {isContentVisible ? (
                 <FontAwesomeIcon icon={faCaretUp} />
@@ -140,7 +140,7 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
                     return (
                       <div className="mt-6" key={title}>
                         {/* Tên sub_category.title */}
-                        <h3 className="uppercase font-semibold text-neutral-500 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
+                        <h3 className="uppercase font-semibold text-neutral-700 md:px-0 text-[32px] leading-[80px] max-md:max-w-full max-md:text-[24px] max-md:leading-[32px] mb-4">
                           Gói cước {title}
                         </h3>
     
@@ -175,14 +175,12 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
                                           <div key={image.asset._id}>
                                             <Image
                                               src={image.asset.url}
-                                              alt={image.caption || "Gallery Image"}
+                                              alt={"Gallery Image"}
                                               width={30}
                                               height={30}
                                               style={{ objectFit: "cover" }}
                                             />
-                                            {image.caption && (
-                                              <p>{image.caption}</p>
-                                            )}
+                                          
                                           </div>
                                         ))}
                                       </span>
@@ -205,7 +203,7 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
                                     >
                                       Đăng ký
                                     </button>
-                                    <a href={`/package/${post?.slug.current}`}>
+                                    <a href={`/package/${post?.slug.current}`} aria-label="Xem chi tiết gói cước">
                                       <button className="min-w-[100px] flex justify-center items-center gap-1 text-center text-[#CE2127] bg-[#FFFFFF] border-[#CE2127] border-[1px] py-2 focus:outline-none hover:bg-gray-100 rounded-[25px] font-semibold">
                                         Chi tiết
                                       </button>
@@ -245,7 +243,7 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
                 return (
                   <div className="mt-4" key={title}>
                     {/* Subcategory title */}
-                    <h3 className="uppercase font-semibold text-neutral-500 text-[20px] leading-[40px] mb-2">
+                    <h3 className="uppercase font-semibold text-neutral-700 text-[20px] leading-[40px] mb-2">
                       Gói cước {title}
                     </h3>
     
@@ -291,7 +289,7 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
                                   <span className="mt-2 flex gap-2 bg-white border-[1px] border-solid border-gray-200 text-white px-4 py-2 text-2xl font-bold tracking-tight rounded-full">
                                     {post.gallery.map((image: Image) => (
                                       <div key={image.asset._id}>
-                                        <Image
+                                        <Image loading="lazy"
                                           src={image.asset.url}
                                           alt={image.caption || "Gallery Image"}
                                           width={30}
@@ -316,19 +314,6 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
     
                               {/* Actions */}
                               <div className="flex flex-col gap-2">
-                                {/* Register Button */}
-                                {/* <button
-                                  className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold"
-                                  onClick={() => {
-                                    const phoneNumber = "290";
-                                    const message = encodeURIComponent(
-                                      `${post.title} ${post.globalField}`
-                                    );
-                                    window.location.href = `sms:${phoneNumber}?body=${message}`;
-                                  }}
-                                >
-                                  Đăng ký
-                                </button> */}
                                 <button className="text-sm flex gap-1 items-center mt-auto text-white bg-[#CE2127] border-0 py-2 px-4 focus:outline-none hover:bg-[#AA0000] rounded-[25px] font-semibold">
                                   <a
                                     className="w-full h-full flex items-center justify-center"

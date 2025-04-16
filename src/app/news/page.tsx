@@ -8,7 +8,7 @@ import { client } from "../(sanity)/lib/client";
 import { POSTS_QUERY } from "../(sanity)/lib/queries";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faLeftLong,faRightLong } from "@fortawesome/free-solid-svg-icons";
-// import Image from 'next/image';
+import Image from "next/image";
 
 interface Category {
   title: string;
@@ -86,11 +86,16 @@ export default function Page() {
                   <div key={post._id}>
                     <div className="px-4 ">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 h-full overflow-hidden">
-                        <img
-                          className="lg:h-80 md:h-36 h-[30vh] w-full rounded-lg object-cover object-center "
-                          src={post.mainImage?.asset?.url}
-                          alt="blog"
-                        />
+                        <div className="relative w-full lg:h-80 md:h-36 h-[30vh] rounded-lg overflow-hidden">
+                          <Image
+                            src={post.mainImage?.asset?.url}
+                            alt="blog"
+                            fill
+                            className="object-cover object-center"
+                            sizes="100vw"
+                          />
+                        </div>
+
                         <div className="md:p-6">
                           <div className="flex justify-between">
                             <h2 className="tracking-widest text-base title-font font-medium text-gray-400 mb-1">
@@ -106,6 +111,7 @@ export default function Page() {
                           </div>
                           <h1 className="mt-2 md:mt-4 title-font text-3xl md:text-4xl font-semibold text-gray-900 mb-3  line-clamp-2">
                             <a
+                              aria-label="Xem chi tiết"
                               className="hover:text-[#CE2127]"
                               href={`/posts/${post?.slug.current}`}
                             >
@@ -118,6 +124,7 @@ export default function Page() {
                           </p>
                           <div className="flex items-center flex-wrap mt-2 ">
                             <a
+                              aria-label="Xem chi tiết"
                               href={`/posts/${post?.slug.current}`}
                               className="text-[#CE2127] text-lg inline-flex items-center md:mb-2 lg:mb-0"
                             >
@@ -157,11 +164,16 @@ export default function Page() {
                 <div key={post._id}>
                   <div className="p-4 ">
                     <div className="h-full border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
-                      <img
-                        className="lg:h-60 md:h-36 w-full object-cover object-center"
-                        src={post.mainImage?.asset?.url}
-                        alt="blog"
-                      />
+                      <div className="relative w-full lg:h-60 md:h-36 h-36">
+                        <Image
+                          src={post.mainImage?.asset?.url}
+                          alt="blog"
+                          fill
+                          className="object-cover object-center"
+                          sizes="100vw"
+                        />
+                      </div>
+
                       <div className="p-6">
                         <div className="flex justify-between">
                           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -177,6 +189,7 @@ export default function Page() {
                         </div>
                         <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[55px] line-clamp-2">
                           <a
+                            aria-label="Xem chi tiết"
                             className="hover:text-[#CE2127]"
                             href={`/posts/${post?.slug.current}`}
                           >
@@ -189,6 +202,7 @@ export default function Page() {
                         </p>
                         <div className="flex items-center flex-wrap ">
                           <a
+                            aria-label="Xem chi tiết"
                             href={`/posts/${post?.slug.current}`}
                             className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
                           >
@@ -272,11 +286,16 @@ export default function Page() {
                     <div key={post._id}>
                       <SwiperSlide className="flex justify-center items-center ">
                         <div className="h-full  border-opacity-60 rounded-lg overflow-hidden  bg-white box-shadow-basic">
-                          <img
-                            className="lg:h-60 md:h-36 w-full object-cover object-center"
-                            src={post.mainImage?.asset?.url}
-                            alt="blog"
-                          />
+                          <div className="relative w-full lg:h-60 md:h-36 h-36">
+                            <Image
+                              src={post.mainImage?.asset?.url}
+                              alt="blog"
+                              fill
+                              className="object-cover object-center"
+                              sizes="100vw"
+                            />
+                          </div>
+
                           <div className="p-6">
                             <div className="flex justify-between">
                               <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -292,6 +311,7 @@ export default function Page() {
                             </div>
                             <h1 className="mt-2 title-font text-lg font-medium text-gray-900 mb-3 md:h-[50px] line-clamp-2">
                               <a
+                                aria-label="Xem chi tiết"
                                 className="hover:text-[#CE2127]"
                                 href={`/posts/${post?.slug.current}`}
                               >
@@ -304,6 +324,7 @@ export default function Page() {
                             </p>
                             <div className="flex items-center flex-wrap ">
                               <a
+                                aria-label="Xem chi tiết"
                                 href={`/posts/${post?.slug.current}`}
                                 className="text-[#CE2127] inline-flex items-center md:mb-2 lg:mb-0"
                               >

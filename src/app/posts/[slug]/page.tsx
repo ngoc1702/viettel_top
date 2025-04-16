@@ -106,7 +106,7 @@ const PostPage = async ({ params }: PageProps) => {
             .replace(/\//g, "-")}
         </span>
         <img
-          className="lg:h-[70vh] md:h-36 w-full object-cover object-center mt-6"
+          className="lg:h-[50vh] md:h-36 w-full md:w-[70%] mx-auto object-contain object-center mt-6"
           src={urlFor(post.mainImage).url() || ""}
           alt={post.mainImage?.alt || "Post image"}
         />

@@ -171,7 +171,7 @@ export default async function Page({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-4">
               {/* Displaying info blocks */}
               <div className="h-full bg-white p-4 md:p-6 rounded-xl">
-                <a className="inline-flex items-center">
+                <a aria-label="image" className="inline-flex items-center">
                   <Image
                     alt="testimonial"
                     src={Price}
@@ -188,7 +188,7 @@ export default async function Page({ params }: PageProps) {
                 </a>
               </div>
               <div className="h-full bg-white p-4 md:p-6 rounded-xl">
-                <a className="inline-flex items-center">
+                <a  aria-label="image" className="inline-flex items-center">
                   <Image
                     alt="testimonial"
                     src={Clock}
@@ -205,8 +205,8 @@ export default async function Page({ params }: PageProps) {
                 </a>
               </div>
               <div className="h-full bg-white p-4 md:p-6 rounded-xl">
-                <a className="inline-flex items-center">
-                  <Image
+                <a aria-label="image" className="inline-flex items-center">
+                  <Image 
                     alt="testimonial"
                     src={Traffic}
                     className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
@@ -227,8 +227,8 @@ export default async function Page({ params }: PageProps) {
                 </a>
               </div>
               <div className="h-full bg-white p-4 md:p-6 rounded-xl">
-                <a className="inline-flex items-center">
-                  <Image
+                <a aria-label="image" className="inline-flex items-center">
+                  <Image 
                     alt="testimonial"
                     src={SMS}
                     className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
@@ -260,7 +260,7 @@ export default async function Page({ params }: PageProps) {
           </div>
 
           <img
-            className="lg:h-[70vh] md:h-36 w-full object-cover object-center "
+            className="lg:h-[50vh] md:h-36 w-full md:w-[70%] mx-auto object-contain object-center "
             src={urlFor(post.mainImage).url()}
             alt={post.mainImage?.alt}
           />
@@ -270,7 +270,7 @@ export default async function Page({ params }: PageProps) {
               value={post.body}
               // components={PortableTextComponents}
             />
-          </div>
+          </div> 
         </div>
       </div>
       <PACKAGE_SIMILAR slug={resolvedParams.slug} />
