@@ -33,6 +33,7 @@ export default function Footer() {
               CATEGORIES
             </h2>
             <nav className="list-none mb-10 ">
+              <menu>
               <li className="mb-4">
                 <Link href="/" className="text-gray-600 hover:text-gray-800">
                   Trang chủ
@@ -46,6 +47,7 @@ export default function Footer() {
                   Tin tức
                 </Link>
               </li>
+              </menu>
             </nav>
           </div>
           <div className="lg:w-1/2 md:w-1/2 w-full md:px-4">
@@ -61,7 +63,7 @@ export default function Footer() {
               </div>
               <div className="flex gap-5 items-center mt-4 whitespace-nowrap justify-center">
                 <FontAwesomeIcon icon={faPhone} width={18} />
-                <a
+                <a aria-label="Gọi"
                   href="tel:+18008098"
                   className="self-stretch my-auto hover:underline text-base leading-[30px]"
                 >
