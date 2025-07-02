@@ -39,11 +39,7 @@ export default function Footer() {
                   Trang chủ
                 </Link>
               </li>
-              <li className="mb-4">
-                <Link href="/internet" className="text-gray-600 hover:text-gray-800">
-                  Internet
-                </Link>
-              </li>
+   
               <li>
                 <Link
                   href="/news"

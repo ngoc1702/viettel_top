@@ -44,21 +44,12 @@ declare global {
     dataLayer: { event: string; [key: string]: unknown }[];
   }
 }
-<<<<<<< HEAD
 
 export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(true);
 
-=======
-
-export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(true);
-
->>>>>>> 968f530241bbadc4b48bc693c94d30fe86e0c543
   const handleOpenPopup = (post: Post) => {
     setSelectedPost(post);
     setIsPopupVisible(true);
@@ -78,12 +69,7 @@ export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
     ),
   ];
 
-<<<<<<< HEAD
   // console.log(posts,"GLOBALLLL")
-=======
-
-
->>>>>>> 968f530241bbadc4b48bc693c94d30fe86e0c543
   return (
     <>
       <script
@@ -94,13 +80,8 @@ export default function DATA_MONTH_CLIENT({ posts }: { posts: Post[] }) {
             "@graph": [
               {
                 "@type": "Organization",
-<<<<<<< HEAD
                 name: "Vietteltelecom",
                 url: "https://vietteltelecom.co",
-=======
-                name: "Viettelone",
-                url: "https://viettelone.vn",
->>>>>>> 968f530241bbadc4b48bc693c94d30fe86e0c543
               },
               ...posts.map((post) => ({
                 "@type": "Product",

@@ -24,9 +24,7 @@ export default function Header() {
           <Link href="/" className="mr-12 hover:text-gray-900 cursor-pointer">
             Trang chủ
           </Link>
-          <Link href="/internet" className="mr-12 hover:text-gray-900 cursor-pointer">
-            Internet
-          </Link>
+         
           <Link
             href="/news"
             className="mr-5 hover:text-gray-900 cursor-pointer"
