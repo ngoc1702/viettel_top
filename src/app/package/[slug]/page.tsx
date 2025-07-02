@@ -260,7 +260,7 @@ export default async function Page({ params }: PageProps) {
           </div>
 
           <img
-            className="lg:h-[70vh] md:h-36 w-full object-cover object-center "
+            className="lg:h-[50vh] md:h-36 w-full md:w-[70%] mx-auto object-contain object-center "
             src={urlFor(post.mainImage).url()}
             alt={post.mainImage?.alt}
           />
@@ -270,7 +270,7 @@ export default async function Page({ params }: PageProps) {
               value={post.body}
               // components={PortableTextComponents}
             />
-          </div>
+          </div> 
         </div>
       </div>
       <PACKAGE_SIMILAR slug={resolvedParams.slug} />

@@ -39,6 +39,11 @@ export default function Footer() {
                   Trang chủ
                 </Link>
               </li>
+              <li className="mb-4">
+                <Link href="/internet" className="text-gray-600 hover:text-gray-800">
+                  Internet
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/news"
@@ -86,7 +91,7 @@ export default function Footer() {
       <div className="bg-[#CE2127]">
         <div className="max-content container mx-auto py-4 px-5 flex justify-between flex-wrap sm:flex-row items-center">
           <p className="text-white text-sm text-center sm:text-left">
-          © 2024 viettel.media. All rights reserved
+          © 2024 viettelone.vn All rights reserved
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             {/* <a

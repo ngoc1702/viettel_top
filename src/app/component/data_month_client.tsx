@@ -76,8 +76,8 @@ console.log(posts, "GLOBALLLL")
       "@graph": [
         {
           "@type": "Organization",
-          "name": "Vietteltelecom",
-          "url": "https://vietteltelecom.co",
+          "name": "Viettelone",
+          "url": "https://viettelone.vn",
         },
         ...posts.map(post => ({
           "@type": "Product",

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://vietteltelecom.co
+Host: https://viettelone.vn
 
 # Sitemaps
-Sitemap: https://vietteltelecom.co/sitemap.xml
+Sitemap: https://viettelone.vn/sitemap.xml
