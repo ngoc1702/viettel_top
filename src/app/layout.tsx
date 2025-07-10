@@ -39,7 +39,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/assets/img/favicon.svg" sizes="32x16" />
         <meta name="application-name" content="Viettel" />
-        <meta name="author" content="Vietteltelecom" />
+        <meta name="author" content="viettel.top" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">

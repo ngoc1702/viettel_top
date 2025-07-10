@@ -80,8 +80,8 @@ export default function DATA_DAY_CLIENT({ posts }: { posts: Post[] }) {
             "@graph": [
               {
                 "@type": "Organization",
-                name: "Vietteltelecom",
-                url: "https://vietteltelecom.co",
+                name: "viettel.top",
+                url: "https://viettel.top",
               },
               ...posts.map((post) => ({
                 "@type": "Product",
